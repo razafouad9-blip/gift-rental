@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift Rental</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            background-color: #121212;
+            color: #E5E5E5;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+        .header {
+            padding: 30px 10px;
+        }
+        .title {
+            color: #D4AF37; /* لون ذهبي فخم */
+            font-size: 28px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .subtitle {
+            color: #888;
+            font-size: 14px;
+        }
+        .gift-card {
+            background-color: #1C1C1E;
+            border: 1px solid #D4AF37;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 300px;
+        }
+        .btn-rent {
+            background-color: #D4AF37;
+            color: #000;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="title">Gift Rental</div>
+        <div class="subtitle">أفخم الهدايا والمناسبات بين يديك</div>
+    </div>
+
+    <div class="gift-card">
+        <h3 style="color: #fff; margin: 0;">باقة ورد فاخرة + تغليف ذهبي</h3>
+        <p style="color: #D4AF37; font-weight: bold; margin: 10px 0;">السعر: 25,000 د.ع / يوم</p>
+        <button class="btn-rent" onclick="sendOrder()">احجز الآن</button>
+    </div>
+
+    <script>
+        // تفعيل تفاعل التطبيق مع تليجرام
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand(); // تمديد التطبيق ليملأ الشاشة
+
+        function sendOrder() {
+            tg.sendData("تم طلب حجز باقة الورد الفاخرة");
+            tg.close(); // إغلاق التطبيق بعد الحجز
+        }
+    </script>
+</body>
+</html>
