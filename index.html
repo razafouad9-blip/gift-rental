@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gift Rental</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: #121212;
+            background-color: #0b0b0c;
             color: #ffffff;
             display: flex;
             flex-direction: column;
@@ -23,133 +24,241 @@
             overflow: hidden;
         }
 
-        /* --- الشريط العلوي --- */
+        /* --- الشريط العلوي الفخم --- */
         .top-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
-            background-color: #1a1a1a;
-            border-bottom: 1px solid #d4af37;
+            padding: 12px 16px;
+            background-color: #121214;
+            border-bottom: 1px solid #1f1f23;
         }
 
-        .top-bar .icon-btn {
-            background: none;
-            border: none;
-            color: #d4af37;
-            font-size: 1.2rem;
-            cursor: pointer;
+        .user-profile {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d4af37, #aa7c11);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .top-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .icon-circle-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #1f1f23;
+            border: 1px solid #2d2d34;
+            color: #e5e5e7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .icon-circle-btn:active {
+            transform: scale(0.9);
+            background-color: #d4af37;
+            color: #000;
         }
 
         /* --- المنطقة المركزية للمحتوى --- */
         .main-content {
             flex: 1;
-            padding: 20px;
+            padding: 16px;
             overflow-y: auto;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 20px;
-            padding-bottom: 90px; /* لكي لا يتغطى المحتوى بالشريط السفلي */
+            padding-bottom: 100px;
         }
 
-        .app-title {
-            color: #d4af37;
-            font-size: 1.8rem;
-            margin-top: 10px;
-        }
-
-        .app-subtitle {
-            color: #aaaaaa;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-        }
-
-        /* الكروت والبطاقات */
-        .section-panel {
+        /* البانر الإعلاني المتحرك */
+        .promo-banner {
             width: 100%;
-            max-width: 400px;
-            background-color: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 12px;
-            padding: 20px;
-            display: none; /* مخفي افتراضياً ويظهر حسب الزر المكبوس */
+            background: linear-gradient(135deg, #b8860b, #ffd700);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 20px;
+            color: #000;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
         }
 
-        .section-panel.active {
+        .promo-banner h2 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .promo-banner p {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        /* حاويات الصفحات */
+        .page-panel {
+            display: none;
+        }
+
+        .page-panel.active {
             display: block;
         }
 
-        /* أزرار الأقسام الداخلية */
-        .sub-btn {
-            width: 100%;
-            background-color: #d4af37;
-            color: #121212;
-            border: none;
+        /* شبكة المنتجات (مثل المتجر بالصورة) */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .product-card {
+            background-color: #121214;
+            border: 1px solid #1f1f23;
+            border-radius: 16px;
             padding: 12px;
-            margin: 8px 0;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 1rem;
-            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: border-color 0.2s;
+        }
+
+        .product-card:active {
+            border-color: #d4af37;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            aspect-ratio: 1;
+            background-color: #1f1f23;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            margin-bottom: 8px;
+            color: #d4af37;
+            font-size: 2rem;
         }
 
-        /* --- القائمة السفلية المدمجة --- */
-        .bottom-nav {
+        .product-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #f5f5f7;
+            text-align: right;
+        }
+
+        .product-id {
+            font-size: 0.75rem;
+            color: #86868b;
+            margin-bottom: 8px;
+            text-align: right;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1f1f23;
+            padding: 6px 10px;
+            border-radius: 20px;
+            margin-top: auto;
+        }
+
+        .price-text {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #ffd700;
+        }
+
+        .rent-icon-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        /* القوائم الداخلية الطولية لقسم العرض */
+        .list-item-btn {
+            width: 100%;
+            background-color: #121214;
+            border: 1px solid #1f1f23;
+            padding: 16px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .list-item-btn i {
+            width: 36px;
+            height: 36px;
+            background-color: #1f1f23;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d4af37;
+        }
+
+        /* --- شريط التنقل السفلي الاحترافي المميز --- */
+        .bottom-navbar {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background-color: #1a1a1a;
-            border-top: 1px solid #333;
+            background-color: rgba(18, 18, 20, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid #1f1f23;
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            padding: 10px 5px;
-            z-index: 100;
+            padding: 8px 0 20px 0; /* مساحة حماية سفلية للموبايل */
+            z-index: 999;
         }
 
-        .nav-item {
+        .nav-tab {
             background: none;
             border: none;
-            color: #888888;
+            color: #86868b;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 0.75rem;
-            gap: 5px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            gap: 4px;
             cursor: pointer;
+            transition: color 0.2s;
         }
 
-        .nav-item i {
-            font-size: 1.2rem;
+        .nav-tab i {
+            font-size: 1.25rem;
         }
 
-        /* زر الإيجار بالمنتصف يكون مميزاً وأكبر */
-        .nav-item.center-btn {
-            color: #d4af37;
-            font-weight: bold;
-        }
-        
-        .nav-item.center-btn i {
-            font-size: 1.5rem;
-            background-color: #262626;
-            padding: 10px;
-            border-radius: 50%;
-            border: 1px solid #d4af37;
-            margin-top: -25px;
-        }
-
-        .nav-item.active {
+        .nav-tab.active {
             color: #d4af37;
         }
     </style>
@@ -157,94 +266,113 @@
 <body>
 
     <div class="top-bar">
-        <button class="icon-btn" onclick="alert('جاري فتح إعدادات الحساب وكلمة السر...')">
-            <i class="fa-solid :">⚙️</i> الإعدادات
-        </button>
-        <button class="icon-btn" onclick="alert('جاري الاتصال بالمحفظة الإلكترونية...')">
-            <i class="fa-solid">💳</i> ربط المحفظة
-        </button>
+        <div class="user-profile">
+            <div class="user-avatar"><i class="fa-solid fa-user-astronaut"></i></div>
+            <span>مستأجر رقمي</span>
+        </div>
+        <div class="top-actions">
+            <button class="icon-circle-btn" onclick="alert('فتح الإعدادات وكلمة السر')"><i class="fa-solid fa-gear"></i></button>
+            <button class="icon-circle-btn" onclick="alert('ربط المحفظة الإلكترونية')"><i class="fa-solid fa-wallet"></i></button>
+        </div>
     </div>
 
     <div class="main-content">
-        <h1 class="app-title">Gift Rental</h1>
-        <p class="app-subtitle">أفخم الهدايا والمناسبات بين يديك</p>
-
-        <div id="rent-panel" class="section-panel active">
-            <h3 style="color:#d4af37; margin-bottom:15px;">🔍 تصفح الأقسام المتاحة</h3>
-            <button class="sub-btn" onclick="alert('فتح قسم الهدايا')">🎁 قسم الهدايا</button>
-            <button class="sub-btn" onclick="alert('فتح قسم اليوزرات')">🆔 قسم اليوزرات</button>
-            <button class="sub-btn" onclick="alert('فتح قسم الأرقام المجهولة')">📞 أرقام مجهولة</button>
+        
+        <div class="promo-banner">
+            <h2>New Staking Week</h2>
+            <p>قم بتأجير مقتنياتك الرقمية الآن بأسعار تنافسية</p>
         </div>
 
-        <div id="offer-panel" class="section-panel">
-            <h3 style="color:#d4af37; margin-bottom:15px;">➕ ماذا تريد أن تعرض للإيجار؟</h3>
-            <button class="sub-btn">🎁 عرض هدية جديد</button>
-            <button class="sub-btn">🆔 عرض يوزر مميز</button>
-            <button class="sub-btn">📞 عرض رقم مجهول</button>
+        <div id="panel-rent" class="page-panel active">
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="image-placeholder"><i class="fa-solid fa-gift"></i></div>
+                    <div class="product-title">باقة هدايا فاخرة</div>
+                    <div class="product-id">#5878</div>
+                    <div class="price-row">
+                        <span class="price-text">25k د.ع / يوم</span>
+                        <button class="rent-icon-btn"><i class="fa-solid fa-basket-shopping"></i></button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="image-placeholder"><i class="fa-solid fa-at"></i></div>
+                    <div class="product-title">يوزر تليجرام خماسي</div>
+                    <div class="product-id">#1024</div>
+                    <div class="price-row">
+                        <span class="price-text">15k د.ع / يوم</span>
+                        <button class="rent-icon-btn"><i class="fa-solid fa-basket-shopping"></i></button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="image-placeholder"><i class="fa-solid fa-hashtag"></i></div>
+                    <div class="product-title">رقم مجهول تفعيل</div>
+                    <div class="product-id">#9921</div>
+                    <div class="price-row">
+                        <span class="price-text">5k د.ع / يوم</span>
+                        <button class="rent-icon-btn"><i class="fa-solid fa-basket-shopping"></i></button>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div id="active-panel" class="section-panel">
-            <h3 style="color:#d4af37; margin-bottom:15px;">📂 إيجاراتك النشطة</h3>
-            <p style="color:#aaa;">لا توجد مقتنيات مستأجرة حالياً.</p>
+        <div id="panel-offer" class="page-panel">
+            <button class="list-item-btn"><i class="fa-solid fa-gift"></i> عرض هدية جديد</button>
+            <button class="list-item-btn"><i class="fa-solid fa-at"></i> عرض يوزر مميز</button>
+            <button class="list-item-btn"><i class="fa-solid fa-hashtag"></i> عرض رقم مجهول</button>
         </div>
 
-        <div id="my-offers-panel" class="section-panel">
-            <h3 style="color:#d4af37; margin-bottom:15px;">📦 مقتنياتك المعروضة</h3>
-            <p style="color:#aaa;">لم تقم بعرض أي شيء للإيجار بعد.</p>
+        <div id="panel-active" class="page-panel">
+            <p style="text-align: center; color: #86868b; margin-top: 40px;">لا توجد إيجارات نشطة حالياً.</p>
         </div>
 
-        <div id="wheel-panel" class="section-panel">
-            <h3 style="color:#d4af37; margin-bottom:15px;">🎡 العجلة اليومية</h3>
-            <button class="sub-btn" style="background:#ffcc00;" onclick="spinWheel()">🎰 تدوير العجلة الآن</button>
+        <div id="panel-my-offers" class="page-panel">
+            <p style="text-align: center; color: #86868b; margin-top: 40px;">لم تقم بنشر أي عروض بعد.</p>
         </div>
+
+        <div id="panel-wheel" class="page-panel" style="text-align: center;">
+            <button class="list-item-btn" style="border-color: #d4af37;" onclick="spinWheel()">
+                <i class="fa-solid fa-dice"></i> اضغط لتدوير العجلة اليومية
+            </button>
+        </div>
+
     </div>
 
-    <div class="bottom-nav">
-        <button class="nav-item" onclick="showTab('offer-panel', this)">
-            <span>➕ عرض هدية</span>
+    <div class="bottom-navbar">
+        <button class="nav-tab active" onclick="switchTab('panel-rent', this)">
+            <i class="fa-solid fa-store"></i>
+            <span>المتجر</span>
         </button>
-        <button class="nav-item" onclick="showTab('active-panel', this)">
-            <span>📂 النشطة</span>
+        <button class="nav-tab" onclick="switchTab('panel-offer', this)">
+            <i class="fa-solid fa-circle-plus"></i>
+            <span>عرض منتج</span>
         </button>
-        
-        <button class="nav-item center-btn active" onclick="showTab('rent-panel', this)">
-            <span>🔍 للايجار</span>
+        <button class="nav-tab" onclick="switchTab('panel-active', this)">
+            <i class="fa-solid fa-clock-history"></i>
+            <span>النشطة</span>
         </button>
-        
-        <button class="nav-item" onclick="showTab('my-offers-panel', this)">
-            <span>📦 عروضي</span>
+        <button class="nav-tab" onclick="switchTab('panel-my-offers', this)">
+            <i class="fa-solid fa-box-archive"></i>
+            <span>عروضي</span>
         </button>
-        <button class="nav-item" onclick="showTab('wheel-panel', this)">
-            <span>🎡 العجلة</span>
+        <button class="nav-tab" onclick="switchTab('panel-wheel', this)">
+            <i class="fa-solid fa-clover"></i>
+            <span>العجلة</span>
         </button>
     </div>
 
     <script>
-        // دالة التنقل بين القوائم والتبويبات السفلية
-        function showTab(panelId, button) {
-            // إخفاء كل النوافذ
-            const panels = document.querySelectorAll('.section-panel');
-            panels.forEach(panel => panel.classList.remove('active'));
+        // دالة التنقل الاحترافية بين الصفحات
+        function switchTab(panelId, tabButton) {
+            document.querySelectorAll('.page-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
             
-            // إزالة التحديد النشط من الأزرار
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(item => item.classList.remove('active'));
-            
-            // إظهار النافذة المطلوبة وتحديد الزر
             document.getElementById(panelId).classList.add('active');
-            button.classList.add('active');
+            tabButton.classList.add('active');
         }
 
-        // دالة العجلة اليومية التجريبية
         function spinWheel() {
-            const prizes = [
-                "🎁 مبروك! تأجير هدية مجاناً لمدة يوم",
-                "❌ لم تربح شيء اليوم، حاول مجدداً غداً",
-                "🎡 فرة أخرى! أعد تدوير العجلة",
-                "👑 مبروك! اكتب لقبك الخاص داخل البوت"
-            ];
-            const randomPrize = prizes[Math.floor(Math.random() * prizes.length)];
-            alert(randomPrize);
+            const prizes = ["🎁 تأجير مجاني ليوم", "❌ حاول غداً", "🎡 فرة إضافية", "👑 لقب جديد"];
+            alert(prizes[Math.floor(Math.random() * prizes.length)]);
         }
     </script>
 </body>
