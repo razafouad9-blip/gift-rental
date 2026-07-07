@@ -67,7 +67,7 @@
             cursor: pointer;
         }
 
-        /* زر محفظة TON المعتمد */
+        /* زر محفظة TON Connect */
         .ton-connect-btn {
             background-color: #0098ea;
             color: #ffffff;
@@ -121,7 +121,7 @@
         }
 
         .nav-link.active {
-            color: #800020;
+            color: #ffb3c6;
         }
 
         .nav-link.active::after {
@@ -161,7 +161,7 @@
             color: #2d1418;
         }
 
-        /* كارت تجريبي لاختبار صوت الإشعار وتأجير المقتنيات */
+        /* كارت تجريبي لاختبار التأجير وسماع النغمة */
         .rent-test-card {
             background-color: #160d0f;
             border: 1px solid #2d1418;
@@ -170,6 +170,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 16px;
         }
         
         .rent-action-trigger {
@@ -235,14 +236,14 @@
             transition: all 0.25s;
         }
 
-        /* التكبير الملاحظ والفخم للتبويب الذي تتواجد فيه حالياً */
+        /* التكبير الملاحظ والفخم للتبويب النشط حالياً */
         .dock-tab.active {
             color: #ffb3c6;
             transform: scale(1.22); /* تكبير قوي للأيقونة النشطة */
         }
 
         .dock-tab.active i {
-            color: #800020;
+            color: #ffb3c6;
             filter: drop-shadow(0 0 6px rgba(128,0,32,0.6));
         }
 
@@ -347,21 +348,21 @@
             <i class="fa-solid fa-square-plus"></i>
             <span>عرض هدية</span>
         </button>
-        <button class="dock-tab" onclick="playClickSound(); changeTab('view-active', this)">
+        <button class="dock-tab" onclick="changeTab('view-active', this)">
             <i class="fa-solid fa-receipt"></i>
             <span>النشطة</span>
         </button>
         
-        <button class="dock-tab center-btn active" onclick="playClickSound(); changeTab('view-rent', this)">
+        <button class="dock-tab center-btn active" onclick="changeTab('view-rent', this)">
             <i class="fa-solid fa-bag-shopping"></i>
             <span>للايجار</span>
         </button>
         
-        <button class="dock-tab" onclick="playClickSound(); changeTab('view-my-offers', this)">
+        <button class="dock-tab" onclick="changeTab('view-my-offers', this)">
             <i class="fa-solid fa-folder-open"></i>
             <span>عروضي</span>
         </button>
-        <button class="dock-tab" onclick="playClickSound(); changeTab('view-profile', this)">
+        <button class="dock-tab" onclick="changeTab('view-profile', this)">
             <i class="fa-solid fa-user-gear"></i>
             <span>الملف</span>
         </button>
@@ -376,7 +377,7 @@
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
             osc.type = 'sine';
-            osc.frequency.setValueAtTime(160, audioCtx.currentTime); // تردد هادئ ونظيف
+            osc.frequency.setValueAtTime(160, audioCtx.currentTime); 
             gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
             gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
             osc.connect(gain);
@@ -393,7 +394,7 @@
 
         function playiPhoneNotification() {
             const now = audioCtx.currentTime;
-            const notes = [587.33, 698.46, 880.00]; // نغمات متسارعة تحاكي إشعار الآيفون بدقة
+            const notes = [587.33, 698.46, 880.00]; 
             notes.forEach((freq, index) => {
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
@@ -412,7 +413,6 @@
         function confirmAppClose() {
             playClickSound();
             if (confirm("Are you sure you want to close the app?")) {
-                // محاولة إغلاق نافذة التليجرام مدمجة برمجياً
                 if (window.Telegram && window.Telegram.WebApp) {
                     window.Telegram.WebApp.close();
                 } else {
