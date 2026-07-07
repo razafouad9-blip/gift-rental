@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gift Rental Pro</title>
+    <title>Gift Rental Pro Luxury</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * {
@@ -15,7 +15,7 @@
         }
 
         body {
-            background-color: #121318;
+            background-color: #0b0c10;
             color: #ffffff;
             display: flex;
             flex-direction: column;
@@ -23,34 +23,50 @@
             overflow: hidden;
         }
 
-        /* --- الهيدر العلوي --- */
+        /* --- الهيدر العلوي الفخم --- */
         .header-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 14px 16px;
-            background-color: #181922;
-            border-bottom: 1px solid #222431;
+            background-color: #12131a;
+            border-bottom: 1px solid #1c1e29;
         }
 
-        .profile-info {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #fff;
+        .profile-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-btn-premium {
+            background: linear-gradient(135deg, #1f2232, #151722);
+            border: 1px solid #c5a059;
+            color: #ffd700;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 0 10px rgba(197, 160, 89, 0.1);
+            cursor: pointer;
         }
 
         .action-buttons {
             display: flex;
+            align-items: center;
             gap: 10px;
         }
 
-        .circle-btn {
+        .settings-btn {
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            background-color: #222431;
-            border: 1px solid #2c2f44;
-            color: #8b92b6;
+            background-color: #151722;
+            border: 1px solid #222538;
+            color: #c5a059;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -58,7 +74,24 @@
             cursor: pointer;
         }
 
-        /* --- المساحة الرئيسية للمحتوى --- */
+        /* زر محفظة TON الأزرق الاحترافي */
+        .connect-ton-btn {
+            background-color: #0098ea;
+            color: #ffffff;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(0, 152, 234, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        /* --- المساحة الرئيسية --- */
         .content-area {
             flex: 1;
             padding: 16px;
@@ -74,43 +107,42 @@
             display: block;
         }
 
-        /* --- شريط التبويبات العلوي (مطابق للصورة تماماً) --- */
+        /* --- شريط التبويبات العلوي الذهبي الفخم --- */
         .top-navigation-tabs {
             display: flex;
-            gap: 20px;
-            border-bottom: 1px solid #222431;
-            padding-bottom: 10px;
-            margin-bottom: 16px;
+            gap: 24px;
+            border-bottom: 1px solid #1c1e29;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
         }
 
         .nav-link {
             background: none;
             border: none;
-            color: #7d849b;
+            color: #585d75;
             font-size: 0.95rem;
             font-weight: 700;
             cursor: pointer;
             position: relative;
-            padding: 4px 0;
+            transition: color 0.2s;
         }
 
         .nav-link.active {
-            color: #52a5fc;
+            color: #ffd700;
         }
 
-        /* الخط الأزرق أسفل الزر النشط */
         .nav-link.active::after {
             content: '';
             position: absolute;
-            bottom: -11px;
+            bottom: -13px;
             left: 0;
             right: 0;
             height: 3px;
-            background-color: #52a5fc;
+            background-color: #ffd700;
             border-radius: 2px;
+            box-shadow: 0 0 8px #ffd700;
         }
 
-        /* حاويات التصنيفات الداخلية لقسم للإيجار */
         .category-view {
             display: none;
         }
@@ -119,46 +151,145 @@
             display: block;
         }
 
-        /* صندوق المنتجات الفارغ (المجهز لاستقبال البيانات) */
         .empty-placeholder {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 60px 20px;
-            color: #5d637a;
+            padding: 80px 20px;
+            color: #4e536b;
             font-size: 0.9rem;
             text-align: center;
-            gap: 12px;
+            gap: 14px;
         }
 
         .empty-placeholder i {
-            font-size: 2.5rem;
-            color: #2c2f44;
+            font-size: 2.8rem;
+            color: #1f2232;
         }
 
-        /* قوائم التنسيق للأقسام الأخرى */
         .list-row-item {
             width: 100%;
-            background-color: #181922;
-            border: 1px solid #222431;
+            background-color: #12131a;
+            border: 1px solid #1c1e29;
             padding: 16px;
             border-radius: 14px;
             color: #fff;
             font-weight: 600;
             margin-bottom: 10px;
-            text-align: right;
         }
 
-        /* --- شريط التنقل السفلي الاحترافي (للايجار بالمنتصف) --- */
+        /* --- قسم العجلة اليومية المتطور المحرك --- */
+        .wheel-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        /* السهم المؤشر في أعلى العجلة */
+        .wheel-pointer {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 20px solid #ffd700;
+            position: relative;
+            z-index: 10;
+            margin-bottom: -10px;
+            filter: drop-shadow(0 2px 5px rgba(255,215,0,0.5));
+        }
+
+        /* تصميم العجلة الرسومية الدائرية */
+        .lucky-wheel {
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            border: 6px solid #1c1e29;
+            box-shadow: 0 0 25px rgba(197,160,89,0.25), inset 0 0 15px rgba(0,0,0,0.5);
+            background: conic-gradient(
+                #151722 0deg 90deg, 
+                #1f2232 90deg 180deg, 
+                #151722 180deg 270deg, 
+                #1f2232 270deg 360deg
+            );
+            position: relative;
+            transition: transform 4s cubic-bezier(0.15, 0.85, 0.35, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* مركز العجلة الفخم */
+        .wheel-center-node {
+            width: 45px;
+            height: 45px;
+            background: radial-gradient(circle, #ffd700, #b8860b);
+            border-radius: 50%;
+            position: absolute;
+            z-index: 5;
+            border: 3px solid #12131a;
+            box-shadow: 0 0 10px rgba(255,215,0,0.6);
+        }
+
+        /* نصوص أو مؤشرات داخل العجلة بديلة عن الـ 777 القديمة */
+        .wheel-segment-text {
+            position: absolute;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: #c5a059;
+        }
+        .w1 { transform: rotate(45deg) translate(0, -80px); }
+        .w2 { transform: rotate(135deg) translate(0, -80px); }
+        .w3 { transform: rotate(225deg) translate(0, -80px); }
+        .w4 { transform: rotate(315deg) translate(0, -80px); }
+
+        /* أزرار التحكم بالعجلة */
+        .wheel-controls {
+            display: flex;
+            gap: 12px;
+            width: 100%;
+            max-width: 280px;
+            margin-top: 25px;
+        }
+
+        .spin-action-btn {
+            flex: 2;
+            background: linear-gradient(135deg, #ffd700, #b8860b);
+            color: #000;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(212,175,55,0.3);
+        }
+
+        .skip-action-btn {
+            flex: 1;
+            background-color: #1f2232;
+            border: 1px solid #2c2f44;
+            color: #8b92b6;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: none; /* يظهر فقط أثناء دوران العجلة */
+        }
+
+        /* --- شريط التنقل السفلي الاحترافي ذو التكبير الذكي --- */
         .dock-navbar {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background-color: rgba(24, 25, 34, 0.95);
-            backdrop-filter: blur(20px);
-            border-top: 1px solid #222431;
+            background-color: rgba(18, 19, 26, 0.95);
+            backdrop-filter: blur(25px);
+            border-top: 1px solid #1c1e29;
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             padding: 10px 0 22px 0;
@@ -168,49 +299,66 @@
         .dock-tab {
             background: none;
             border: none;
-            color: #7d849b;
+            color: #4b5066; /* لون الأيقونات الباهتة (غير النشطة) */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 0.68rem;
+            font-size: 0.65rem;
             font-weight: 600;
-            gap: 5px;
+            gap: 4px;
             cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: scale(0.9); /* حجم أصغر افتراضي لبقية الأزرار */
         }
 
         .dock-tab i {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
+            transition: all 0.3s;
         }
 
-        /* تمييز زر للإيجار في المنتصف */
+        /* تمييز التكبير واللون الذهبي المضيء للتبويب النشط حالياً */
+        .dock-tab.active {
+            color: #ffd700;
+            transform: scale(1.15); /* تكبير كامل للقسم المختار حالياً */
+        }
+
+        .dock-tab.active i {
+            filter: drop-shadow(0 0 6px rgba(255,215,0,0.4));
+        }
+
+        /* زر للايجار المميز بالمنتصف */
         .dock-tab.center-btn i {
-            font-size: 1.4rem;
-            background-color: #222431;
+            font-size: 1.3rem;
+            background-color: #151722;
             padding: 8px;
             border-radius: 50%;
-            border: 1px solid #2c2f44;
-            margin-top: -20px;
-        }
-
-        .dock-tab.active {
-            color: #52a5fc;
+            border: 1px solid #222538;
+            margin-top: -15px;
         }
 
         .dock-tab.center-btn.active i {
-            background-color: #52a5fc;
-            color: #fff;
-            border-color: #52a5fc;
+            background-color: #ffd700;
+            color: #000;
+            border-color: #ffd700;
         }
     </style>
 </head>
 <body>
 
     <div class="header-bar">
-        <div class="profile-info">الملف الشخصي</div>
+        <div class="profile-container">
+            <button class="profile-btn-premium" onclick="alert('ملفي الشخصي')">
+                <i class="fa-solid fa-crown"></i> مـلـفـي
+            </button>
+        </div>
         <div class="action-buttons">
-            <button class="circle-btn"><i class="fa-solid fa-sliders"></i></button>
-            <button class="circle-btn"><i class="fa-solid fa-wallet"></i></button>
+            <button class="connect-ton-btn" onclick="alert('Connecting to TON Wallet...')">
+                <i class="fa-solid fa-circle-nodes"></i> Connect TON
+            </button>
+            <button class="settings-btn" onclick="alert('الإعدادات الفخمة')">
+                <i class="fa-solid fa-gears"></i>
+            </button>
         </div>
     </div>
 
@@ -248,19 +396,33 @@
         </div>
 
         <div id="view-offer" class="page-view">
-            <div class="list-row-item">➕ إضافة عرض جديد للمتجر</div>
+            <div class="list-row-item" style="text-align: center;">➕ إضافة مقتنى جديد للإيجار</div>
         </div>
 
         <div id="view-active" class="page-view">
-            <p style="text-align: center; color: #5d637a; margin-top: 40px;">لا توجد عقود نشطة</p>
+            <p style="text-align: center; color: #4e536b; margin-top: 40px;">لا توجد عقود إيجار نشطة حالياً</p>
         </div>
 
         <div id="view-my-offers" class="page-view">
-            <p style="text-align: center; color: #5d637a; margin-top: 40px;">قائمة مقتنياتك فارغة</p>
+            <p style="text-align: center; color: #4e536b; margin-top: 40px;">قائمة عروضك المضافة فارغة</p>
         </div>
 
         <div id="view-wheel" class="page-view">
-            <div class="list-row-item" style="text-align: center; color: #52a5fc;">🎰 العجلة اليومية جاهزة للتدوير</div>
+            <div class="wheel-container">
+                <div class="wheel-pointer"></div>
+                <div class="lucky-wheel" id="mainWheel">
+                    <div class="wheel-center-node"></div>
+                    <div class="wheel-segment-text w1">🎁 جائزة كبرى</div>
+                    <div class="wheel-segment-text w2">⚡ فرة مجانية</div>
+                    <div class="wheel-segment-text w3">❌ حظاً أوفر</div>
+                    <div class="wheel-segment-text w4">💎 رتبة ملكية</div>
+                </div>
+
+                <div class="wheel-controls">
+                    <button class="spin-action-btn" id="spinBtn" onclick="startSpinning()">إبدأ الدوران 🎰</button>
+                    <button class="skip-action-btn" id="skipBtn" onclick="skipSpinning()">تخطي ⏩</button>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -291,7 +453,10 @@
     </div>
 
     <script>
-        // دالة التنقل بين صفحات القائمة السفلية
+        let isSpinning = false;
+        let finalDegree = 0;
+        let wheelTimer = null;
+
         function changeTab(pageId, tabElement) {
             document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.dock-tab').forEach(t => t.classList.remove('active'));
@@ -300,13 +465,52 @@
             tabElement.classList.add('active');
         }
 
-        // دالة التنقل بين فلاتر العناوين العلوية (هدايا، أسماء مستخدمين، أرقام)
         function switchCategory(catId, btnElement) {
             document.querySelectorAll('.category-view').forEach(c => c.classList.remove('active'));
             document.querySelectorAll('.nav-link').forEach(t => t.classList.remove('active'));
             
             document.getElementById(catId).classList.add('active');
             btnElement.classList.add('active');
+        }
+
+        function startSpinning() {
+            if (isSpinning) return;
+            isSpinning = true;
+            
+            document.getElementById('spinBtn').disabled = true;
+            document.getElementById('skipBtn').style.display = 'block';
+
+            const randomExtraDeg = Math.floor(Math.random() * 360);
+            finalDegree = 1800 + randomExtraDeg;
+
+            const wheel = document.getElementById('mainWheel');
+            wheel.style.transition = 'transform 4s cubic-bezier(0.15, 0.85, 0.35, 1)';
+            wheel.style.transform = `rotate(${finalDegree}deg)`;
+
+            wheelTimer = setTimeout(() => {
+                showWheelResult();
+            }, 4000);
+        }
+
+        function skipSpinning() {
+            if (!isSpinning) return;
+            clearTimeout(wheelTimer);
+
+            const wheel = document.getElementById('mainWheel');
+            wheel.style.transition = 'none';
+            wheel.style.transform = `rotate(${finalDegree}deg)`;
+            
+            showWheelResult();
+        }
+
+        function showWheelResult() {
+            const prizes = ["💎 رتبة ملكية مؤقتة!", "❌ حظاً أوفر غداً", "⚡ فرة مجانية إضافية", "🎁 باقة تأجير مجانية تماماً"];
+            const rewardIndex = Math.floor((finalDegree % 360) / 90);
+            alert(`🎉 النتيجة: ${prizes[rewardIndex]}`);
+
+            document.getElementById('spinBtn').disabled = false;
+            document.getElementById('skipBtn').style.display = 'none';
+            isSpinning = false;
         }
     </script>
 </body>
