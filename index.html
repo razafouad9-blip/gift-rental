@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gift Rental</title>
+    <title>Gift Rental Pro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * {
@@ -12,11 +12,10 @@
             padding: 0;
             font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             user-select: none;
-            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: #0b0b0c;
+            background-color: #0c0c0e;
             color: #ffffff;
             display: flex;
             flex-direction: column;
@@ -24,355 +23,423 @@
             overflow: hidden;
         }
 
-        /* --- الشريط العلوي الفخم --- */
-        .top-bar {
+        /* --- الهيدر العلوي الاحترافي --- */
+        .header-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 16px;
-            background-color: #121214;
-            border-bottom: 1px solid #1f1f23;
+            padding: 14px 20px;
+            background-color: #131316;
+            border-bottom: 1px solid #1f1f24;
         }
 
-        .user-profile {
+        .profile-section {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
+            gap: 10px;
         }
 
-        .user-avatar {
-            width: 32px;
-            height: 32px;
+        .avatar-glow {
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #d4af37, #aa7c11);
+            background: linear-gradient(135deg, #ffd700, #b8860b);
             display: flex;
             align-items: center;
             justify-content: center;
             color: #000;
-            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
         }
 
-        .top-actions {
+        .profile-info h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .profile-info p {
+            font-size: 0.7rem;
+            color: #8a8a93;
+        }
+
+        .action-buttons {
             display: flex;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .icon-circle-btn {
-            width: 36px;
-            height: 36px;
+        .circle-btn {
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
-            background-color: #1f1f23;
-            border: 1px solid #2d2d34;
-            color: #e5e5e7;
+            background-color: #1c1c21;
+            border: 1px solid #2c2c35;
+            color: #d4af37;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1rem;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
 
-        .icon-circle-btn:active {
+        .circle-btn:active {
             transform: scale(0.9);
             background-color: #d4af37;
             color: #000;
         }
 
-        /* --- المنطقة المركزية للمحتوى --- */
-        .main-content {
+        /* --- المساحة الرئيسية للمحتوى --- */
+        .content-area {
             flex: 1;
             padding: 16px;
             overflow-y: auto;
-            padding-bottom: 100px;
+            padding-bottom: 95px;
         }
 
-        /* البانر الإعلاني المتحرك */
-        .promo-banner {
-            width: 100%;
-            background: linear-gradient(135deg, #b8860b, #ffd700);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 20px;
-            color: #000;
+        /* البانر الإعلاني الكبير */
+        .hero-banner {
+            background: linear-gradient(135deg, #1c1c21 0%, #0c0c0e 100%);
+            border: 1px solid #2c2c35;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 24px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
         }
 
-        .promo-banner h2 {
-            font-size: 1.2rem;
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 60%);
+        }
+
+        .hero-banner h2 {
+            font-size: 1.4rem;
+            color: #ffd700;
             font-weight: 800;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
 
-        .promo-banner p {
+        .hero-banner p {
             font-size: 0.8rem;
-            opacity: 0.9;
+            color: #a1a1aa;
         }
 
         /* حاويات الصفحات */
-        .page-panel {
+        .page-view {
             display: none;
         }
 
-        .page-panel.active {
+        .page-view.active {
             display: block;
         }
 
-        /* شبكة المنتجات (مثل المتجر بالصورة) */
-        .products-grid {
+        /* الأقسام المنبثقة بشكل كروت متطورة (المتجر الجديد) */
+        .market-category-title {
+            font-size: 0.95rem;
+            color: #8a8a93;
+            margin: 15px 0 10px 0;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .grid-layout {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-top: 10px;
+            gap: 14px;
         }
 
-        .product-card {
-            background-color: #121214;
-            border: 1px solid #1f1f23;
-            border-radius: 16px;
-            padding: 12px;
+        .premium-card {
+            background-color: #131316;
+            border: 1px solid #1f1f24;
+            border-radius: 18px;
+            padding: 14px;
             display: flex;
             flex-direction: column;
-            position: relative;
-            transition: border-color 0.2s;
+            gap: 10px;
+            transition: all 0.2s;
         }
 
-        .product-card:active {
+        .premium-card:active {
             border-color: #d4af37;
+            background-color: #1c1c21;
         }
 
-        .image-placeholder {
+        .card-media {
             width: 100%;
-            aspect-ratio: 1;
-            background-color: #1f1f23;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 8px;
-            color: #d4af37;
-            font-size: 2rem;
-        }
-
-        .product-title {
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-            color: #f5f5f7;
-            text-align: right;
-        }
-
-        .product-id {
-            font-size: 0.75rem;
-            color: #86868b;
-            margin-bottom: 8px;
-            text-align: right;
-        }
-
-        .price-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #1f1f23;
-            padding: 6px 10px;
-            border-radius: 20px;
-            margin-top: auto;
-        }
-
-        .price-text {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: #ffd700;
-        }
-
-        .rent-icon-btn {
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 0.9rem;
-            cursor: pointer;
-        }
-
-        /* القوائم الداخلية الطولية لقسم العرض */
-        .list-item-btn {
-            width: 100%;
-            background-color: #121214;
-            border: 1px solid #1f1f23;
-            padding: 16px;
+            aspect-ratio: 1.1;
+            background: linear-gradient(145deg, #1c1c21, #131316);
             border-radius: 14px;
             display: flex;
             align-items: center;
-            gap: 14px;
-            color: #fff;
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            cursor: pointer;
+            justify-content: center;
+            color: #ffd700;
+            font-size: 2.2rem;
+            border: 1px solid #2c2c35;
         }
 
-        .list-item-btn i {
-            width: 36px;
-            height: 36px;
-            background-color: #1f1f23;
+        .card-details h3 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #f4f4f5;
+            margin-bottom: 4px;
+        }
+
+        .card-details p {
+            font-size: 0.75rem;
+            color: #71717a;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 4px;
+        }
+
+        .price-badge {
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: #ffd700;
+            background-color: rgba(212, 175, 55, 0.1);
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        .action-rent-btn {
+            background-color: #ffd700;
+            color: #000;
+            border: none;
+            width: 32px;
+            height: 32px;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #d4af37;
+            cursor: pointer;
+            font-size: 0.9rem;
         }
 
-        /* --- شريط التنقل السفلي الاحترافي المميز --- */
-        .bottom-navbar {
+        /* قوائم العرض الطولية الأنيقة */
+        .list-row-btn {
+            width: 100%;
+            background-color: #131316;
+            border: 1px solid #1f1f24;
+            padding: 16px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #fff;
+            margin-bottom: 12px;
+            cursor: pointer;
+        }
+
+        .list-row-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .list-row-left i {
+            width: 40px;
+            height: 40px;
+            background-color: #1c1c21;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffd700;
+            border: 1px solid #2c2c35;
+        }
+
+        .list-row-btn > .fa-chevron-left {
+            color: #4b5563;
+            font-size: 0.8rem;
+        }
+
+        /* --- شريط التنقل السفلي الحديث (iOS Style) --- */
+        .dock-navbar {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background-color: rgba(18, 18, 20, 0.95);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid #1f1f23;
+            background-color: rgba(19, 19, 22, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid #1f1f24;
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            padding: 8px 0 20px 0; /* مساحة حماية سفلية للموبايل */
+            padding: 10px 0 22px 0;
             z-index: 999;
         }
 
-        .nav-tab {
+        .dock-tab {
             background: none;
             border: none;
-            color: #86868b;
+            color: #71717a;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 0.7rem;
-            font-weight: 500;
-            gap: 4px;
+            font-size: 0.68rem;
+            font-weight: 600;
+            gap: 5px;
             cursor: pointer;
-            transition: color 0.2s;
+            transition: color 0.2s ease;
         }
 
-        .nav-tab i {
-            font-size: 1.25rem;
+        .dock-tab i {
+            font-size: 1.3rem;
+            transition: transform 0.2s;
         }
 
-        .nav-tab.active {
-            color: #d4af37;
+        .dock-tab.active {
+            color: #ffd700;
+        }
+
+        .dock-tab.active i {
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
 
-    <div class="top-bar">
-        <div class="user-profile">
-            <div class="user-avatar"><i class="fa-solid fa-user-astronaut"></i></div>
-            <span>مستأجر رقمي</span>
+    <div class="header-bar">
+        <div class="profile-section">
+            <div class="avatar-glow"><i class="fa-solid fa-crown"></i></div>
+            <div class="profile-info">
+                <h4>الحساب الفخم</h4>
+                <p>مستأجر متميز</p>
+            </div>
         </div>
-        <div class="top-actions">
-            <button class="icon-circle-btn" onclick="alert('فتح الإعدادات وكلمة السر')"><i class="fa-solid fa-gear"></i></button>
-            <button class="icon-circle-btn" onclick="alert('ربط المحفظة الإلكترونية')"><i class="fa-solid fa-wallet"></i></button>
+        <div class="action-buttons">
+            <button class="circle-btn" onclick="alert('الإعدادات وكلمة السر')"><i class="fa-solid fa-sliders"></i></button>
+            <button class="circle-btn" onclick="alert('محفظة الزين كاش والآسيا')"><i class="fa-solid fa-wallet"></i></button>
         </div>
     </div>
 
-    <div class="main-content">
+    <div class="content-area">
         
-        <div class="promo-banner">
-            <h2>New Staking Week</h2>
-            <p>قم بتأجير مقتنياتك الرقمية الآن بأسعار تنافسية</p>
+        <div class="hero-banner">
+            <h2>Gift Rental Pro</h2>
+            <p>سوق تأجير المقتنيات الرقمية والحسابات المميزة الأول</p>
         </div>
 
-        <div id="panel-rent" class="page-panel active">
-            <div class="products-grid">
-                <div class="product-card">
-                    <div class="image-placeholder"><i class="fa-solid fa-gift"></i></div>
-                    <div class="product-title">باقة هدايا فاخرة</div>
-                    <div class="product-id">#5878</div>
-                    <div class="price-row">
-                        <span class="price-text">25k د.ع / يوم</span>
-                        <button class="rent-icon-btn"><i class="fa-solid fa-basket-shopping"></i></button>
+        <div id="view-rent" class="page-view active">
+            <div class="market-category-title">🔥 المقتنيات المتاحة الآن</div>
+            <div class="grid-layout">
+                <div class="premium-card">
+                    <div class="card-media"><i class="fa-solid fa-box-open"></i></div>
+                    <div class="card-details">
+                        <h3>باقة هدايا مجهزة</h3>
+                        <p>ID: #8890</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="price-badge">25,000 د.ع</span>
+                        <button class="action-rent-btn"><i class="fa-solid fa-bolt"></i></button>
                     </div>
                 </div>
-                <div class="product-card">
-                    <div class="image-placeholder"><i class="fa-solid fa-at"></i></div>
-                    <div class="product-title">يوزر تليجرام خماسي</div>
-                    <div class="product-id">#1024</div>
-                    <div class="price-row">
-                        <span class="price-text">15k د.ع / يوم</span>
-                        <button class="rent-icon-btn"><i class="fa-solid fa-basket-shopping"></i></button>
+                <div class="premium-card">
+                    <div class="card-media"><i class="fa-solid fa-at"></i></div>
+                    <div class="card-details">
+                        <h3>يوزر شبه ثلاثي</h3>
+                        <p>ID: #4412</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="price-badge">15,000 د.ع</span>
+                        <button class="action-rent-btn"><i class="fa-solid fa-bolt"></i></button>
                     </div>
                 </div>
-                <div class="product-card">
-                    <div class="image-placeholder"><i class="fa-solid fa-hashtag"></i></div>
-                    <div class="product-title">رقم مجهول تفعيل</div>
-                    <div class="product-id">#9921</div>
-                    <div class="price-row">
-                        <span class="price-text">5k د.ع / يوم</span>
-                        <button class="rent-icon-btn"><i class="fa-solid fa-basket-shopping"></i></button>
+                <div class="premium-card">
+                    <div class="card-media"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="card-details">
+                        <h3>رقم تفعيل مجهول</h3>
+                        <p>ID: #1092</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="price-badge">5,000 د.ع</span>
+                        <button class="action-rent-btn"><i class="fa-solid fa-bolt"></i></button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="panel-offer" class="page-panel">
-            <button class="list-item-btn"><i class="fa-solid fa-gift"></i> عرض هدية جديد</button>
-            <button class="list-item-btn"><i class="fa-solid fa-at"></i> عرض يوزر مميز</button>
-            <button class="list-item-btn"><i class="fa-solid fa-hashtag"></i> عرض رقم مجهول</button>
+        <div id="view-offer" class="page-view">
+            <div class="market-category-title">➕ اختر تصنيف المقتنى لعرضه للإيجار</div>
+            <button class="list-row-btn">
+                <div class="list-row-left"><i class="fa-solid fa-box-open"></i> عرض هدية جديدة</div>
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button class="list-row-btn">
+                <div class="list-row-left"><i class="fa-solid fa-at"></i> عرض يوزر مميز</div>
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button class="list-row-btn">
+                <div class="list-row-left"><i class="fa-solid fa-shield-halved"></i> عرض رقم مجهول</div>
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
         </div>
 
-        <div id="panel-active" class="page-panel">
-            <p style="text-align: center; color: #86868b; margin-top: 40px;">لا توجد إيجارات نشطة حالياً.</p>
+        <div id="view-active" class="page-view">
+            <p style="text-align: center; color: #71717a; margin-top: 50px; font-size: 0.9rem;">🚫 لا توجد عقود إيجار نشطة لديك حالياً.</p>
         </div>
 
-        <div id="panel-my-offers" class="page-panel">
-            <p style="text-align: center; color: #86868b; margin-top: 40px;">لم تقم بنشر أي عروض بعد.</p>
+        <div id="view-my-offers" class="page-view">
+            <p style="text-align: center; color: #71717a; margin-top: 50px; font-size: 0.9rem;">📦 لم تقم بإضافة أي مقتنيات خاصة للعرض بعد.</p>
         </div>
 
-        <div id="panel-wheel" class="page-panel" style="text-align: center;">
-            <button class="list-item-btn" style="border-color: #d4af37;" onclick="spinWheel()">
-                <i class="fa-solid fa-dice"></i> اضغط لتدوير العجلة اليومية
+        <div id="view-wheel" class="page-view">
+            <button class="list-row-btn" style="border-color: #ffd700;" onclick="spinTheWheel()">
+                <div class="list-row-left"><i class="fa-solid fa-clover"></i> جرب تدوير العجلة اليومية</div>
+                <span style="color:#ffd700; font-size:0.8rem; font-weight:700;">إبدأ 🎰</span>
             </button>
         </div>
 
     </div>
 
-    <div class="bottom-navbar">
-        <button class="nav-tab active" onclick="switchTab('panel-rent', this)">
-            <i class="fa-solid fa-store"></i>
-            <span>المتجر</span>
+    <div class="dock-navbar">
+        <button class="dock-tab active" onclick="changeTab('view-rent', this)">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span>للايجار</span>
         </button>
-        <button class="nav-tab" onclick="switchTab('panel-offer', this)">
-            <i class="fa-solid fa-circle-plus"></i>
-            <span>عرض منتج</span>
+        <button class="dock-tab" onclick="changeTab('view-offer', this)">
+            <i class="fa-solid fa-square-plus"></i>
+            <span>عرض هدية</span>
         </button>
-        <button class="nav-tab" onclick="switchTab('panel-active', this)">
-            <i class="fa-solid fa-clock-history"></i>
+        <button class="dock-tab" onclick="changeTab('view-active', this)">
+            <i class="fa-solid fa-receipt"></i>
             <span>النشطة</span>
         </button>
-        <button class="nav-tab" onclick="switchTab('panel-my-offers', this)">
-            <i class="fa-solid fa-box-archive"></i>
+        <button class="dock-tab" onclick="changeTab('view-my-offers', this)">
+            <i class="fa-solid fa-folder-open"></i>
             <span>عروضي</span>
         </button>
-        <button class="nav-tab" onclick="switchTab('panel-wheel', this)">
-            <i class="fa-solid fa-clover"></i>
+        <button class="dock-tab" onclick="changeTab('view-wheel', this)">
+            <i class="fa-solid fa-circle-nodes"></i>
             <span>العجلة</span>
         </button>
     </div>
 
     <script>
-        // دالة التنقل الاحترافية بين الصفحات
-        function switchTab(panelId, tabButton) {
-            document.querySelectorAll('.page-panel').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        function changeTab(pageId, tabElement) {
+            document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.dock-tab').forEach(t => t.classList.remove('active'));
             
-            document.getElementById(panelId).classList.add('active');
-            tabButton.classList.add('active');
+            document.getElementById(pageId).classList.add('active');
+            tabElement.classList.add('active');
         }
 
-        function spinWheel() {
-            const prizes = ["🎁 تأجير مجاني ليوم", "❌ حاول غداً", "🎡 فرة إضافية", "👑 لقب جديد"];
-            alert(prizes[Math.floor(Math.random() * prizes.length)]);
+        function spinTheWheel() {
+            const results = ["🎁 مبروك! إيجار مجاني ليوم واحد", "❌ حظاً أوفر المرة القادمة", "🎡 فرصة تدوير إضافية فورية", "👑 حصلت على لقب ملك الإيجار!"];
+            alert(results[Math.floor(Math.random() * results.length)]);
         }
     </script>
 </body>
