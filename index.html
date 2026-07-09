@@ -1,827 +1,459 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Gift Rental Premium</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-
-<style>
-
-:root{
---bg:#07090F;
---card:#111827;
---primary:#7C3AED;
---primary2:#A855F7;
---accent:#38BDF8;
---text:#F8FAFC;
---muted:#94A3B8;
-}
-
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Inter',sans-serif;
--webkit-tap-highlight-color:transparent;
-}
-
-
-body{
-
-background:
-radial-gradient(circle at top,#1E1B4B,#07090F 50%);
-
-color:white;
-height:100vh;
-overflow:hidden;
-
-}
-
-
-button{
-
-border:0;
-outline:none;
-cursor:pointer;
-
-}
-
-
-.header{
-
-height:75px;
-
-display:flex;
-align-items:center;
-justify-content:space-between;
-
-padding:0 18px;
-
-background:rgba(15,23,42,.7);
-
-backdrop-filter:blur(25px);
-
-border-bottom:1px solid rgba(255,255,255,.08);
-
-}
-
-
-.logo{
-
-display:flex;
-align-items:center;
-gap:12px;
-
-}
-
-
-.logo-icon{
-
-width:45px;
-height:45px;
-
-border-radius:15px;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-background:linear-gradient(135deg,var(--primary),var(--primary2));
-
-box-shadow:0 0 25px #7c3aed;
-
-}
-
-
-.logo-title h2{
-
-font-size:18px;
-
-}
-
-
-.logo-title span{
-
-font-size:12px;
-color:var(--muted);
-
-}
-
-
-
-.header-actions{
-
-display:flex;
-gap:8px;
-align-items:center;
-
-}
-
-
-
-.circle-btn{
-
-width:42px;
-height:42px;
-
-border-radius:50%;
-
-background:#ffffff12;
-
-color:white;
-
-}
-
-
-
-.wallet{
-
-padding:12px 16px;
-
-border-radius:30px;
-
-background:linear-gradient(135deg,var(--primary),var(--primary2));
-
-color:white;
-
-font-weight:700;
-
-}
-
-
-
-.main{
-
-height:calc(100vh - 155px);
-
-overflow:auto;
-
-padding:18px;
-
-}
-
-
-
-.tabs{
-
-display:flex;
-
-gap:10px;
-
-margin-bottom:20px;
-
-}
-
-
-
-.tab{
-
-padding:10px 18px;
-
-border-radius:30px;
-
-background:#ffffff10;
-
-color:#aaa;
-
-font-weight:700;
-
-}
-
-
-.tab.active{
-
-background:linear-gradient(135deg,var(--primary),var(--primary2));
-
-color:white;
-
-}
-
-
-
-.page{
-
-display:none;
-
-}
-
-
-
-.page.active{
-
-display:block;
-
-}
-
-
-
-.card{
-
-background:#ffffff08;
-
-border:1px solid #ffffff12;
-
-border-radius:22px;
-
-padding:18px;
-
-margin-bottom:15px;
-
-backdrop-filter:blur(15px);
-
-}
-
-
-
-.product{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-}
-
-
-.product-icon{
-
-width:60px;
-height:60px;
-
-border-radius:20px;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-font-size:25px;
-
-background:linear-gradient(135deg,var(--primary),var(--accent));
-
-}
-
-
-.product-info{
-
-display:flex;
-align-items:center;
-gap:15px;
-
-}
-
-
-.price{
-
-color:var(--accent);
-
-font-size:20px;
-
-font-weight:800;
-
-}
-
-
-.rent-btn{
-
-margin-top:10px;
-
-padding:10px 20px;
-
-border-radius:15px;
-
-background:linear-gradient(135deg,var(--primary),var(--primary2));
-
-color:white;
-
-font-weight:bold;
-
-}
-
-
-
-.bottom-nav{
-
-position:fixed;
-
-bottom:0;
-
-left:0;
-
-right:0;
-
-height:80px;
-
-display:grid;
-
-grid-template-columns:repeat(5,1fr);
-
-background:#0f172acc;
-
-backdrop-filter:blur(25px);
-
-}
-
-
-.nav-item{
-
-display:flex;
-
-flex-direction:column;
-
-justify-content:center;
-
-align-items:center;
-
-gap:5px;
-
-color:#94a3b8;
-
-font-size:12px;
-
-}
-
-
-
-.nav-item i{
-
-font-size:20px;
-
-}
-
-
-
-.nav-item.active{
-
-color:white;
-
-}
-
-
-.nav-item.active i{
-
-color:#a855f7;
-
-}
-
-
-.toast{
-
-position:fixed;
-
-top:90px;
-
-left:50%;
-
-transform:translateX(-50%);
-
-background:#111827;
-
-padding:15px 25px;
-
-border-radius:20px;
-
-display:none;
-
-z-index:999;
-
-box-shadow:0 0 30px #000;
-
-}
-
-
-</style></head>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift Rental Premium</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+        :root {
+            --bg: #07090F;
+            --card: #111827;
+            --primary: #7C3AED;
+            --primary2: #A855F7;
+            --accent: #38BDF8;
+            --text: #F8FAFC;
+            --muted: #94A3B8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: radial-gradient(circle at top, #1E1B4B, #07090F 50%);
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        button {
+            border: 0;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .header {
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 18px;
+            background: rgba(15, 23, 42, .7);
+            backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(255, 255, 255, .08);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary), var(--primary2));
+            box-shadow: 0 0 25px #7c3aed;
+        }
+
+        .logo-title h2 {
+            font-size: 18px;
+        }
+
+        .logo-title span {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .circle-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #ffffff12;
+            color: white;
+            transition: background 0.3s ease;
+        }
+
+        .circle-btn:hover {
+            background: #ffffff20;
+        }
+
+        .wallet {
+            padding: 12px 16px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, var(--primary), var(--primary2));
+            color: white;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .main {
+            height: calc(100vh - 155px);
+            overflow: auto;
+            padding: 18px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 10px 18px;
+            border-radius: 30px;
+            background: #ffffff10;
+            color: #aaa;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, var(--primary), var(--primary2));
+            color: white;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .card {
+            background: #ffffff08;
+            border: 1px solid #ffffff12;
+            border-radius: 22px;
+            padding: 18px;
+            margin-bottom: 15px;
+            backdrop-filter: blur(15px);
+        }
+
+        .product {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+        }
+
+        .product-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .price {
+            color: var(--accent);
+            font-size: 20px;
+            font-weight: 800;
+            text-align: left;
+        }
+
+        .rent-btn {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--primary2));
+            color: white;
+            font-weight: bold;
+            transition: transform 0.2s ease;
+        }
+
+        .rent-btn:active {
+            transform: scale(0.95);
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            background: #0f172acc;
+            backdrop-filter: blur(25px);
+            border-top: 1px solid rgba(255, 255, 255, .05);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            color: #94a3b8;
+            font-size: 12px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-item.active {
+            color: white;
+        }
+
+        .nav-item.active i {
+            color: #a855f7;
+            transform: translateY(-2px);
+        }
+
+        /* تعديل ستايل الـ Toast ليكون فخماً جداً ومتناسقاً */
+        .toast {
+            position: fixed;
+            top: 90px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            background: rgba(17, 24, 39, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 20px;
+            display: none;
+            z-index: 9999;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 15px rgba(124, 58, 237, 0.2);
+            font-weight: 600;
+            font-size: 14px;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+        }
+    </style>
+</head>
 <body>
 
-<div class="header">
-
-<div class="logo">
-
-<div class="logo-icon">
-<i class="fa-solid fa-gem"></i>
-</div>
-
-<div class="logo-title">
-<h2>Gift Rental</h2>
-<span>Premium Platform</span>
-</div>
-
-</div>
-
-
-<div class="header-actions">
-
-<button class="circle-btn" onclick="showToast('No new notifications')">
-<i class="fa-solid fa-bell"></i>
-</button>
-
-
-<button class="circle-btn" onclick="showToast('Settings')">
-<i class="fa-solid fa-gear"></i>
-</button>
-
-
-<button class="wallet" onclick="connectWallet()">
-<i class="fa-solid fa-wallet"></i>
-TON Connect
-</button>
-
-
-</div>
-
-</div>
-
-
-
-<div class="main">
-
-
-<div class="tabs">
-
-<button class="tab active" onclick="openPage('gifts',this)">
-Gifts
-</button>
-
-
-<button class="tab" onclick="openPage('users',this)">
-Users
-</button>
-
-
-<button class="tab" onclick="openPage('numbers',this)">
-Numbers
-</button>
-
-
-</div>
-
-
-
-
-<!-- Gifts Page -->
-
-<div id="gifts" class="page active">
-
-
-<div class="card">
-
-
-<div class="product">
-
-
-<div class="product-info">
-
-
-<div class="product-icon">
-<i class="fa-solid fa-gift"></i>
-</div>
-
-
-<div>
-
-<h3>
-Premium Gift
-</h3>
-
-<p>
-Luxury Telegram Gift Rental
-</p>
-
-</div>
-
-
-</div>
-
-
-
-<div>
-
-<div class="price">
-20 TON
-</div>
-
-
-<button class="rent-btn" onclick="rentGift()">
-Rent
-</button>
-
-
-</div>
-
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="card">
-
-
-<div class="product">
-
-
-<div class="product-info">
-
-
-<div class="product-icon">
-<i class="fa-solid fa-crown"></i>
-</div>
-
-
-<div>
-
-<h3>
-Golden Gift
-</h3>
-
-<p>
-VIP Telegram Gift
-</p>
-
-
-</div>
-
-
-</div>
-
-
-<div>
-
-<div class="price">
-50 TON
-</div>
-
-
-<button class="rent-btn" onclick="rentGift()">
-Rent
-</button>
-
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-<!-- Users Page -->
-
-<div id="users" class="page">
-
-
-<div class="card">
-
-<h2>
-Users
-</h2>
-
-<br>
-
-<p>
-Connected users will appear here.
-</p>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-<!-- Numbers Page -->
-
-<div id="numbers" class="page">
-
-
-<div class="card">
-
-
-<h2>
-Statistics
-</h2>
-
-<br>
-
-
-<p>
-🎁 Gifts Available: 25</p>
-
-<p>
-👤 Users: 1200
-</p>
-
-<p>
-💎 Rentals: 540
-</p>
-
-
-</div>
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-<div class="toast" id="toast">
-
-</div>
-
-
-
-
-
-<div class="bottom-nav">
-
-
-<div class="nav-item active" onclick="navClick(this,'Home')">
-
-<i class="fa-solid fa-house"></i>
-
-<span>
-Home
-</span>
-
-</div>
-
-
-
-<div class="nav-item" onclick="navClick(this,'Offers')">
-
-<i class="fa-solid fa-folder-open"></i>
-
-<span>
-Offers
-</span>
-
-</div>
-
-
-
-<div class="nav-item" onclick="navClick(this,'Add')">
-
-<i class="fa-solid fa-plus"></i>
-
-<span>
-Add
-</span>
-
-</div>
-
-
-
-<div class="nav-item" onclick="navClick(this,'History')">
-
-<i class="fa-solid fa-clock"></i>
-
-<span>
-History
-</span>
-
-</div>
-
-
-
-<div class="nav-item" onclick="navClick(this,'Profile')">
-
-<i class="fa-solid fa-user"></i>
-
-<span>
-Profile
-</span>
-
-</div>
-
-
-</div><script>
-    // نظام المحفظة الوهمي (يمكنك ربطه بـ TON Connect الحقيقي لاحقاً)
-    let isConnected = false;
-
-    function connectWallet() {
-        const walletBtn = document.querySelector('.wallet');
-        if (!isConnected) {
-            walletBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Connecting...';
+    <div class="header">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fa-solid fa-gem"></i>
+            </div>
+            <div class="logo-title">
+                <h2>Gift Rental</h2>
+                <span>Premium Platform</span>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <button class="circle-btn" onclick="showToast('🔔 لا توجد تنبيهات جديدة حالياً')">
+                <i class="fa-solid fa-bell"></i>
+            </button>
+            <button class="circle-btn" onclick="showToast('⚙️ فتح الإعدادات Premium')">
+                <i class="fa-solid fa-gear"></i>
+            </button>
+            <button class="wallet" onclick="connectWallet()">
+                <i class="fa-solid fa-wallet"></i>
+                TON Connect
+            </button>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="tabs">
+            <button class="tab active" onclick="openPage('gifts', this)">Gifts</button>
+            <button class="tab" onclick="openPage('users', this)">Users</button>
+            <button class="tab" onclick="openPage('numbers', this)">Numbers</button>
+        </div>
+
+        <div id="gifts" class="page active">
+            <div class="card">
+                <div class="product">
+                    <div class="product-info">
+                        <div class="product-icon"><i class="fa-solid fa-gift"></i></div>
+                        <div>
+                            <h3>Premium Gift</h3>
+                            <p>Luxury Telegram Gift Rental</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="price">20 TON</div>
+                        <button class="rent-btn" onclick="rentGift()">Rent</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="product">
+                    <div class="product-info">
+                        <div class="product-icon"><i class="fa-solid fa-crown"></i></div>
+                        <div>
+                            <h3>Golden Gift</h3>
+                            <p>VIP Telegram Gift</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="price">50 TON</div>
+                        <button class="rent-btn" onclick="rentGift()">Rent</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="users" class="page">
+            <div class="card">
+                <h2>Users</h2>
+                <br>
+                <p>Connected users will appear here.</p>
+            </div>
+        </div>
+
+        <div id="numbers" class="page">
+            <div class="card">
+                <h2>Statistics</h2>
+                <br>
+                <p>🎁 Gifts Available: 25</p>
+                <p>👤 Users: 1200</p>
+                <p>💎 Rentals: 540</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="navClick(this, 'Home')">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </div>
+        <div class="nav-item" onclick="navClick(this, 'Offers')">
+            <i class="fa-solid fa-folder-open"></i>
+            <span>Offers</span>
+        </div>
+        <div class="nav-item" onclick="navClick(this, 'Add')">
+            <i class="fa-solid fa-plus"></i>
+            <span>Add</span>
+        </div>
+        <div class="nav-item" onclick="navClick(this, 'History')">
+            <i class="fa-solid fa-clock"></i>
+            <span>History</span>
+        </div>
+        <div class="nav-item" onclick="navClick(this, 'Profile')">
+            <i class="fa-solid fa-user"></i>
+            <span>Profile</span>
+        </div>
+    </div>
+
+    <script>
+        let isConnected = false;
+
+        // نظام ربط المحفظة الفخم
+        function connectWallet() {
+            const walletBtn = document.querySelector('.wallet');
+            if (!isConnected) {
+                walletBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Connecting...';
+                setTimeout(() => {
+                    isConnected = true;
+                    walletBtn.style.background = 'linear-gradient(135deg, #10B981, #059669)'; 
+                    walletBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i> UQ...8f9z';
+                    showToast('تم ربط محفظة TON بنجاح! 💎');
+                }, 1200);
+            } else {
+                showToast('المحفظة متصلة بالفعل ✨');
+            }
+        }
+
+        // التبديل السلس بين الـ Tabs
+        function openPage(pageId, element) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+
+            document.getElementById(pageId).classList.add('active');
+            element.classList.add('active');
+            
+            if (navigator.vibrate) navigator.vibrate(5);
+        }
+
+        // التنقل عبر القائمة السفلية
+        function navClick(element, sectionName) {
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            element.classList.add('active');
+            
+            if (navigator.vibrate) navigator.vibrate(10);
+            showToast(`الانتقال إلى قسم: ${sectionName}`);
+        }
+
+        // معالجة استئجار الهدايا
+        function rentGift() {
+            if (!isConnected) {
+                showToast('⚠️ يرجى ربط محفظة TON أولاً لإتمام العملية');
+                return;
+            }
+            
+            showToast('⏳ جاري معالجة الطلب عبر شبكة TON...');
             setTimeout(() => {
-                isConnected = true;
-                walletBtn.style.background = 'linear-gradient(135deg, #10B981, #059669)'; // لون أخضر فخم عند الاتصال
-                walletBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i> UQ...8f9z';
-                showToast('تم ربط محفظة TON بنجاح! 💎');
-            }, 1200);
-        } else {
-            showToast('المحفظة متصلة بالفعل.');
+                showToast('🎉 تم الاستئجار بنجاح! تفقد قسم الـ History');
+            }, 2000);
         }
-    }
 
-    // التبديل بين التبويبات العلوية (Tabs)
-    function openPage(pageId, element) {
-        // إخفاء كل الصفحات
-        document.querySelectorAll('.page').forEach(page => {
-            page.classList.remove('active');
-        });
-        
-        // إزالة التنشيط من كل الأزرار
-        document.querySelectorAll('.tab').forEach(tab => {
-            tab.classList.remove('active');
-        });
-
-        // إظهار الصفحة المطلوبة وتنشيط الزر الخاص بها
-        document.getElementById(pageId).classList.add('active');
-        element.classList.add('active');
-    }
-
-    // التنقل عبر القائمة السفلية (Bottom Nav)
-    function navClick(element, sectionName) {
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.classList.remove('active');
-        });
-        element.classList.add('active');
-        
-        // تأثير اهتزاز خفيف عند الضغط (Haptic feedback تأثير برمجى)
-        if (navigator.vibrate) {
-            navigator.vibrate(10);
-        }
-        
-        showToast(`الانتقال إلى قسم: ${sectionName}`);
-    }
-
-    // استئجار الهدايا
-    function rentGift() {
-        if (!isConnected) {
-            showToast('⚠️ يرجى ربط محفظة TON أولاً لإتمام العملية');
-            return;
-        }
-        
-        showToast('⏳ جاري معالجة الطلب عبر شبكة TON...');
-        setTimeout(() => {
-            showToast('🎉 تم الاستئجار بنجاح! تفقد قسم الـ History');
-        }, 2000);
-    }
-
-    // نظام التنبيهات الفخم (Toast Notification) مع أنيميشن سلس
-    let toastTimeout;
-    function showToast(message) {
-        const toast = document.getElementById('toast');
-        
-        // مسح التنبيه السابق إن وجد فوراً
-        clearTimeout(toastTimeout);
-        
-        toast.innerHTML = message;
-        toast.style.display = 'block';
-        toast.style.opacity = '0';
-        toast.style.transform = 'translateX(-50%) translateY(-20px)';
-        toast.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-
-        // تأثير الدخول
-        setTimeout(() => {
-            toast.style.opacity = '1';
-            toast.style.transform = 'translateX(-50%) translateY(0)';
-        }, 50);
-
-        // تأثير الخروج التلقائي بعد 3 ثواني
-        toastTimeout = setTimeout(() => {
+        // نظام أنيميشن الـ Toast المرن والمطور
+        let toastTimeout;
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            clearTimeout(toastTimeout);
+            
+            toast.innerHTML = message;
+            toast.style.display = 'block';
+            
+            // تهيئة التأثير الفيزيائي (Elastic Bounce)
+            toast.style.transition = 'none';
             toast.style.opacity = '0';
             toast.style.transform = 'translateX(-50%) translateY(-20px)';
+
+            // تشغيل الدخول بعد أجزاء من الثانية
             setTimeout(() => {
-                toast.style.display = 'none';
-            }, 400);
-        }, 3000);
-    }
-</script>
+                toast.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                toast.style.opacity = '1';
+                toast.style.transform = 'translateX(-50%) translateY(0)';
+            }, 30);
+
+            // الإخفاء التلقائي الفخم
+            toastTimeout = setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(-50%) translateY(-20px)';
+                setTimeout(() => {
+                    toast.style.display = 'none';
+                }, 400);
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
