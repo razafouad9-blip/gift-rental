@@ -7,19 +7,19 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght \@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <style>
         :root {
             --bg: #07090F;
-            --card: rgba(255, 255, 255, 0.05);
-            --border: rgba(255, 255, 255, 0.1);
+            --card: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.08);
             --primary: #7C3AED;
             --primary2: #A855F7;
             --accent: #38BDF8;
             --text: #F8FAFC;
-            --muted: #94A3B8;
+            --muted: #64748B;
             --admin-color: #EF4444;
             --success: #10B981;
         }
@@ -33,27 +33,20 @@
         }
 
         body {
-            background: radial-gradient(circle at top, #1E1B4B, #07090F 50%);
+            background: radial-gradient(circle at top, #1E1B4B, #07090F 60%);
             color: white;
             height: 100vh;
             overflow: hidden;
         }
 
-        button, input, select {
-            border: 0;
-            outline: none;
-            color: white;
+        button, input, select, textarea {
+            border: 0; outline: none; color: white;
         }
         button { cursor: pointer; }
 
         .header {
-            height: 75px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 18px;
-            background: rgba(15, 23, 42, .7);
-            backdrop-filter: blur(25px);
+            height: 75px; display: flex; align-items: center; justify-content: space-between;
+            padding: 0 18px; background: rgba(15, 23, 42, .7); backdrop-filter: blur(25px);
             border-bottom: 1px solid rgba(255, 255, 255, .08);
         }
 
@@ -72,127 +65,163 @@
         .circle-btn {
             width: 42px; height: 42px; border-radius: 50%;
             background: #ffffff12; color: white;
-            transition: background 0.3s ease, transform 0.2s;
-            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s ease; display: flex; align-items: center; justify-content: center;
         }
         .circle-btn:hover { background: #ffffff20; transform: scale(1.05); }
-        .circle-btn:active { transform: scale(0.95); }
 
         .admin-trigger-btn {
-            background: rgba(239, 68, 68, 0.15);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: var(--admin-color);
+            background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: var(--admin-color);
         }
-        .admin-trigger-btn:hover { background: rgba(239, 68, 68, 0.3); }
 
         .wallet {
             padding: 12px 16px; border-radius: 30px;
             background: linear-gradient(135deg, var(--primary), var(--primary2));
-            color: white; font-weight: 700;
-            display: flex; align-items: center; gap: 8px;
+            color: white; font-weight: 700; display: flex; align-items: center; gap: 8px;
             transition: all 0.3s ease;
         }
 
-        .main { height: calc(100vh - 155px); overflow: auto; padding: 18px; }
+        /* حاوية الصفحات مع خاصية النقل السلس والأنيميشن */
+        .main { 
+            height: calc(100vh - 175px); overflow-y: auto; overflow-x: hidden; padding: 18px; 
+            position: relative;
+        }
 
-        .tabs { display: flex; gap: 10px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 5px; }
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
         .tab {
-            padding: 10px 18px; border-radius: 30px;
-            background: #ffffff10; color: #aaa; font-weight: 700;
-            transition: all 0.3s ease; white-space: nowrap;
+            padding: 10px 18px; border-radius: 30px; background: #ffffff10; color: #aaa;
+            font-weight: 700; transition: all 0.3s ease;
         }
         .tab.active { background: linear-gradient(135deg, var(--primary), var(--primary2)); color: white; }
         .tab.admin-tab.active { background: var(--admin-color); }
 
-        .page { display: none; }
-        .page.active { display: block; }
+        /* تأثيرات حركة الانتقال بين الصفحات الأساسية */
+        .page { 
+            display: none; opacity: 0; transform: translateY(15px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .page.active { display: block; opacity: 1; transform: translateY(0); }
 
+        /* كارد أساسي زجاجي مرن */
         .card {
             background: var(--card); border: 1px solid var(--border);
-            border-radius: 22px; padding: 18px; margin-bottom: 15px;
-            backdrop-filter: blur(15px);
+            border-radius: 24px; padding: 20px; margin-bottom: 15px;
+            backdrop-filter: blur(15px); transition: all 0.3s ease;
         }
 
+        /* أنيميشن نبض وتوهج الأيقونات في الوسط */
+        .live-icon-container {
+            font-size: 50px; color: var(--accent); margin-bottom: 20px;
+            text-align: center; animation: dynamicGlow 2.5s infinite ease-in-out;
+        }
+        @keyframes dynamicGlow {
+            0% { transform: scale(1); filter: drop-shadow(0 0 0px transparent); }
+            50% { transform: scale(1.08); filter: drop-shadow(0 0 20px currentColor); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 0px transparent); }
+        }
+
+        /* --- تنويع الكاردات حسب القسم --- */
+        
+        /* 1. كارد المنتجات والهدايا */
         .product { display: flex; justify-content: space-between; align-items: center; }
         .product-icon {
-            width: 60px; height: 60px; border-radius: 20px;
-            display: flex; align-items: center; justify-content: center; font-size: 25px;
+            width: 55px; height: 55px; border-radius: 18px;
+            display: flex; align-items: center; justify-content: center; font-size: 22px;
             background: linear-gradient(135deg, var(--primary), var(--accent));
         }
         .product-info { display: flex; align-items: center; gap: 15px; }
-        .price { color: var(--accent); font-size: 20px; font-weight: 800; text-align: left; }
-
+        .price { color: var(--accent); font-size: 18px; font-weight: 800; }
         .rent-btn {
-            margin-top: 10px; padding: 10px 20px; border-radius: 15px;
+            margin-top: 8px; padding: 10px 18px; border-radius: 14px;
             background: linear-gradient(135deg, var(--primary), var(--primary2));
-            color: white; font-weight: bold; transition: transform 0.2s ease;
+            color: white; font-weight: bold; transition: transform 0.2s;
         }
         .rent-btn:active { transform: scale(0.95); }
 
-        /* نموذج الإدخال الفخم */
+        /* 2. كارد قسم العروض (كارد أفقي مع خط مضيء وعلامة خصم) */
+        .offer-card {
+            border-left: 4px solid #F59E0B; background: linear-gradient(90deg, rgba(245,158,11,0.05), transparent);
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .discount-badge { background: #F59E0B; padding: 5px 10px; border-radius: 10px; font-weight: bold; font-size: 12px; }
+
+        /* 3. كارد قسم الإضافة (صندوق سحب وإسقاط محاكي ذكي) */
+        .upload-zone {
+            border: 2px dashed rgba(255, 255, 255, 0.15); border-radius: 20px;
+            padding: 30px; text-align: center; background: rgba(255, 255, 255, 0.01);
+            cursor: pointer; transition: all 0.3s;
+        }
+        .upload-zone:hover { border-color: var(--primary); background: rgba(124, 58, 237, 0.04); }
+
+        /* 4. كارد السجل (تصميم التايم لاين النقطي) */
+        .history-item { display: flex; gap: 15px; position: relative; padding-bottom: 20px; }
+        .history-item::before {
+            content: ''; position: absolute; right: 15px; top: 30px; bottom: 0;
+            width: 2px; background: rgba(255, 255, 255, 0.08);
+        }
+        .history-item:last-child::before { display: none; }
+        .history-dot { width: 32px; height: 32px; border-radius: 50%; background: #1F2937; display: flex; align-items: center; justify-content: center; font-size: 14px; z-index: 2; }
+
+        /* 5. كارد الملف الشخصي (شبكي متطور) */
+        .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
+        .profile-stat { background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 15px; border-radius: 16px; text-align: center; }
+
+        /* حقول الإدخال الفخمة للأدمن */
         .form-group { margin-bottom: 15px; display: flex; flex-direction: column; gap: 8px; }
-        .form-group label { font-size: 14px; font-weight: 600; color: var(--muted); }
+        .form-group label { font-size: 13px; font-weight: 600; color: var(--muted); }
         .form-control {
             background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border);
-            padding: 12px 15px; border-radius: 12px; font-size: 15px; transition: all 0.3s;
+            padding: 12px 15px; border-radius: 14px; font-size: 15px; transition: all 0.3s;
         }
-        .form-control:focus { border-color: var(--primary); background: rgba(255, 255, 255, 0.08); }
+        .form-control:focus { border-color: var(--primary); }
         .submit-btn {
-            width: 100%; padding: 14px; border-radius: 12px; font-weight: bold; font-size: 16px;
-            background: linear-gradient(135deg, var(--primary), var(--primary2)); transition: all 0.3s;
-        }
-        .submit-btn.btn-admin { background: var(--admin-color); }
-
-        /* ستايل الجداول والمشرفين */
-        .admin-table { width: 100%; border-collapse: collapse; margin-top: 15px; text-align: right; }
-        .admin-table th, .admin-table td { padding: 12px; border-bottom: 1px solid var(--border); font-size: 14px; }
-        .admin-table th { color: var(--muted); font-weight: 600; }
-        .badge { padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: bold; }
-        .badge.admin { background: rgba(239, 68, 68, 0.2); color: #EF4444; }
-        .badge.mod { background: rgba(56, 189, 248, 0.2); color: #38BDF8; }
-
-        /* نافذة تسجيل الدخول المنبثقة للأدمن */
-        .modal-overlay {
-            position: fixed; top:0; left:0; right:0; bottom:0;
-            background: rgba(0,0,0,0.7); backdrop-filter: blur(10px);
-            display: none; justify-content: center; align-items: center; z-index: 10000;
-        }
-        .modal-card {
-            background: #111827; border: 1px solid rgba(239, 68, 68, 0.2);
-            border-radius: 24px; padding: 25px; width: 90%; max-width: 400px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            width: 100%; padding: 14px; border-radius: 14px; font-weight: bold;
+            background: linear-gradient(135deg, var(--primary), var(--primary2));
         }
 
-        .dev-container { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 30px 10px; }
-        .dev-icon { font-size: 45px; color: var(--accent); margin-bottom: 15px; animation: pulse 2s infinite; }
-        .dev-icon.admin-icon { color: var(--admin-color); }
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.08); opacity: 1; filter: drop-shadow(0 0 15px currentColor); }
-            100% { transform: scale(1); opacity: 0.8; }
-        }
-
+        /* تعبئة المساحة الميتة بالأسفل وتنسيق الملاحة */
         .bottom-nav {
-            position: fixed; bottom: 0; left: 0; right: 0; height: 80px;
+            position: fixed; bottom: 0; left: 0; right: 0; height: 100px; /* تم رفع الارتفاع */
             display: grid; grid-template-columns: repeat(5, 1fr);
-            background: #0f172acc; backdrop-filter: blur(25px);
+            background: #0f172acc; backdrop-filter: blur(35px);
             border-top: 1px solid rgba(255, 255, 255, .05); z-index: 999;
+            padding-top: 10px;
         }
         .nav-item {
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            gap: 5px; color: #94a3b8; font-size: 12px; cursor: pointer; transition: color 0.3s ease;
+            display: flex; flex-direction: column; justify-content: flex-start; align-items: center;
+            gap: 5px; color: #64748B; font-size: 11px; cursor: pointer; transition: color 0.3s ease;
         }
         .nav-item i { font-size: 20px; transition: transform 0.3s ease; }
         .nav-item.active { color: white; }
-        .nav-item.active i { color: #a855f7; transform: translateY(-2px); }
+        .nav-item.active i { color: #a855f7; transform: translateY(-3px); }
+
+        /* اللمسة الفنية لملء الفراغ السفلي الميت */
+        .bottom-decor {
+            position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+            font-size: 10px; color: rgba(255, 255, 255, 0.2); letter-spacing: 2px;
+            text-transform: uppercase; font-weight: 700; pointer-events: none;
+            display: flex; align-items: center; gap: 5px; white-space: nowrap;
+        }
+        .bottom-decor::before, .bottom-decor::after {
+            content: ''; display: inline-block; width: 25px; height: 1px; background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* نافذة تسجيل الدخول */
+        .modal-overlay {
+            position: fixed; top:0; left:0; right:0; bottom:0;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(15px);
+            display: none; justify-content: center; align-items: center; z-index: 10000;
+        }
+        .modal-card {
+            background: #0f172a; border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 24px; padding: 25px; width: 90%; max-width: 380px;
+        }
 
         .toast {
             position: fixed; top: 90px; left: 50%; transform: translateX(-50%) translateY(-20px);
-            background: rgba(17, 24, 39, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; padding: 14px 28px;
-            border-radius: 20px; display: none; z-index: 99999; font-weight: 600; font-size: 14px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 15px rgba(124, 58, 237, 0.2);
-            white-space: nowrap; pointer-events: none; opacity: 0;
+            background: rgba(17, 24, 39, 0.9); backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; padding: 12px 24px;
+            border-radius: 16px; display: none; z-index: 99999; font-weight: 600; font-size: 13px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); white-space: nowrap; pointer-events: none; opacity: 0;
         }
     </style>
 </head>
@@ -206,18 +235,9 @@
                 <span>Premium Platform</span>
             </div>
         </div>
-
         <div class="header-actions">
-            <button class="circle-btn admin-trigger-btn" onclick="triggerAdminAccess()" title="لوحة الإدارة">
-                <i class="fa-solid fa-user-shield"></i>
-            </button>
-            <button class="circle-btn" onclick="showToast('⚙️ فتح الإعدادات العامة للموقع قريباً')">
-                <i class="fa-solid fa-gear"></i>
-            </button>
-            <button class="wallet" onclick="connectWallet()">
-                <i class="fa-solid fa-wallet"></i>
-                TON Connect
-            </button>
+            <button class="circle-btn admin-trigger-btn" onclick="triggerAdminAccess()"><i class="fa-solid fa-user-shield"></i></button>
+            <button class="wallet" onclick="connectWallet()"><i class="fa-solid fa-wallet"></i> TON Connect</button>
         </div>
     </div>
 
@@ -229,177 +249,101 @@
                 <button class="tab" onclick="openSubTab('users', this)">Users</button>
                 <button class="tab" onclick="openSubTab('numbers', this)">Numbers</button>
             </div>
-
             <div id="gifts" class="sub-page" style="display: block;">
                 <div id="gifts-list">
                     <div class="card">
                         <div class="product">
                             <div class="product-info">
                                 <div class="product-icon"><i class="fa-solid fa-gift"></i></div>
-                                <div>
-                                    <h3>Premium Gift</h3>
-                                    <p>Luxury Telegram Gift Rental</p>
-                                </div>
+                                <div><h3>Premium Gift</h3><p style="color:var(--muted); font-size:13px;">Luxury Telegram Gift Rental</p></div>
                             </div>
-                            <div>
-                                <div class="price">20 TON</div>
-                                <button class="rent-btn" onclick="rentGift()">Rent</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="product">
-                            <div class="product-info">
-                                <div class="product-icon"><i class="fa-solid fa-crown"></i></div>
-                                <div>
-                                    <h3>Golden Gift</h3>
-                                    <p>VIP Telegram Gift</p>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="price">50 TON</div>
-                                <button class="rent-btn" onclick="rentGift()">Rent</button>
-                            </div>
+                            <div><div class="price">20 TON</div><button class="rent-btn" onclick="rentGift()">Rent</button></div>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div id="users" class="sub-page" style="display: none;">
-                <div class="card">
-                    <h2>المستخدمين المتصلين</h2>
-                    <br>
-                    <p style="color:var(--muted)">سيتم سرد عناوين محافظ المستخدمين هنا بمجرد الربط الحي.</p>
-                </div>
+                <div class="card"><h2>المستخدمين المتصلين</h2><br><p style="color:var(--muted)">سيتم ربط وإظهار المحافظ النشطة قريباً.</p></div>
             </div>
-
             <div id="numbers" class="sub-page" style="display: none;">
-                <div class="card">
-                    <h2>إحصائيات المنصة الحالية</h2>
-                    <br>
-                    <p>🎁 إجمالي الهدايا المتاحة: <span id="stat-gifts-count">2</span></p>
-                    <p>👤 إجمالي الأعضاء: 1200</p>
-                    <p>💎 عمليات الإيجار الناجحة: 540</p>
-                </div>
+                <div class="card"><h2>إحصائيات حية</h2><br><p>🎁 الهدايا المتاحة: <span id="stat-gifts-count">1</span></p></div>
             </div>
         </div>
 
         <div id="page-Offers" class="page">
-            <div class="card dev-container">
-                <div class="dev-icon"><i class="fa-solid fa-tags"></i></div>
-                <h2>قسم العروض والخصومات</h2>
-                <p style="color: var(--muted); margin-top: 10px;">الموقع في مرحلة التطوير 🛠️</p>
+            <div class="live-icon-container" style="color: #F59E0B;"><i class="fa-solid fa-tags"></i></div>
+            <div class="card offer-card">
+                <div>
+                    <h3 style="color:#F59E0B">عرض الرمز الذهبي</h3>
+                    <p style="color:var(--muted); font-size:13px; margin-top:4px;">احصل على خصم 15% عند استئجار قطعتين</p>
+                </div>
+                <div class="discount-badge">15% OFF</div>
             </div>
+            <p style="text-align: center; color: var(--muted); font-size: 13px; margin-top:20px;">الموقع في مرحلة التطوير البرمجي 🛠️</p>
         </div>
 
         <div id="page-Add" class="page">
-            <div class="card dev-container">
-                <div class="dev-icon"><i class="fa-solid fa-circle-plus"></i></div>
-                <h2>طلب عرض هدية للإيجار</h2>
-                <p style="color: var(--muted); margin-top: 10px;">الموقع في مرحلة التطوير 🛠️</p>
+            <div class="live-icon-container" style="color: var(--primary2);"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+            <div class="card" style="padding: 15px;">
+                <h3 style="margin-bottom:15px;">عرض هديتك للإيجار</h3>
+                <div class="upload-zone" onclick="showToast('ℹ️ اسحب ملف توثيق الهدية هنا عند اكتمال الـ Backend')">
+                    <i class="fa-solid fa-file-invoice-dollar" style="font-size:30px; color:var(--muted); margin-bottom:10px;"></i>
+                    <p style="font-size:14px; font-weight:600;">انقر لرفع مستند ملكية الهدية أو الـ NFT</p>
+                    <span style="font-size:11px; color:var(--muted);">يدعم صيغ JSON, Metadata للتأكيد</span>
+                </div>
             </div>
+            <p style="text-align: center; color: var(--muted); font-size: 13px;">الموقع في مرحلة التطوير البرمجي 🛠️</p>
         </div>
 
         <div id="page-History" class="page">
-            <div class="card dev-container">
-                <div class="dev-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
-                <h2>سجل العمليات والتعاملات</h2>
-                <p style="color: var(--muted); margin-top: 10px;">الموقع في مرحلة التطوير 🛠️</p>
+            <div class="live-icon-container" style="color: var(--accent);"><i class="fa-solid fa-timeline"></i></div>
+            <div class="card" style="padding-bottom:5px;">
+                <h3 style="margin-bottom:20px;">سجل الحركات الأخير</h3>
+                <div class="history-item">
+                    <div class="history-dot" style="color:var(--success)"><i class="fa-solid fa-check"></i></div>
+                    <div><h4>ربط محفظة تجريبية</h4><p style="color:var(--muted); font-size:12px;">منذ ثانيتين • تصفح داخلي ناجح</p></div>
+                </div>
+                <div class="history-item">
+                    <div class="history-dot" style="color:var(--accent)"><i class="fa-solid fa-circle-info"></i></div>
+                    <div><h4>تحديث الواجهات الرسومية</h4><p style="color:var(--muted); font-size:12px;">منذ دقيقة • إصدار v2.5 مخصص</p></div>
+                </div>
             </div>
+            <p style="text-align: center; color: var(--muted); font-size: 13px;">الموقع في مرحلة التطوير البرمجي 🛠️</p>
         </div>
 
         <div id="page-Profile" class="page">
-            <div class="card dev-container">
-                <div class="dev-icon"><i class="fa-solid fa-user-gear"></i></div>
-                <h2>الملف الشخصي للمستخدم</h2>
-                <p style="color: var(--muted); margin-top: 10px;">الموقع في مرحلة التطوير 🛠️</p>
+            <div class="live-icon-container" style="color: #10B981;"><i class="fa-solid fa-circle-user"></i></div>
+            <div class="card">
+                <div style="display:flex; align-items:center; gap:15px;">
+                    <div style="width:50px; height:50px; border-radius:50%; background:rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; font-size:20px;"><i class="fa-solid fa-fingerprint"></i></div>
+                    <div><h3>مستخدم غير مسجل</h3><p style="color:var(--muted); font-size:12px;">يرجى ربط TON للتعريف</p></div>
+                </div>
+                <div class="profile-grid">
+                    <div class="profile-stat"><h5>0</h5><span style="font-size:11px; color:var(--muted)">مستأجر</span></div>
+                    <div class="profile-stat"><h5>0 TON</h5><span style="font-size:11px; color:var(--muted)">مدفوعات</span></div>
+                </div>
             </div>
+            <p style="text-align: center; color: var(--muted); font-size: 13px;">الموقع في مرحلة التطوير البرمجي 🛠️</p>
         </div>
 
         <div id="page-Admin" class="page">
-            <h2 style="color: var(--admin-color); margin-bottom: 15px;"><i class="fa-solid fa-user-shield"></i> لوحة التحكم العليا للمشرفين</h2>
-            
+            <h2 style="color: var(--admin-color); margin-bottom: 15px;"><i class="fa-solid fa-user-shield"></i> الإدارة العليا</h2>
             <div class="tabs">
                 <button class="tab admin-tab active" onclick="openAdminTab('admin-gifts', this)">إدارة الهدايا</button>
-                <button class="tab admin-tab" onclick="openAdminTab('admin-staff', this)">إضافة رتب وممشرفين</button>
-                <button class="tab admin-tab" onclick="openAdminTab('admin-settings', this)">إعدادات المنصة</button>
+                <button class="tab admin-tab" onclick="openAdminTab('admin-staff', this)">إضافة رتب</button>
             </div>
-
             <div id="admin-gifts" class="admin-sub-page" style="display: block;">
                 <div class="card">
-                    <h3>صلاحية: إضافة منتج/هدية جديدة للمنصة</h3>
-                    <br>
-                    <div class="form-group">
-                        <label>اسم الهدية الفاخرة</label>
-                        <input type="text" id="new-gift-name" class="form-control" placeholder="مثال: Premium Telegram Star">
-                    </div>
-                    <div class="form-group">
-                        <label>الوصف القصير</label>
-                        <input type="text" id="new-gift-desc" class="form-control" placeholder="مثال: Special Edition VIP Gift">
-                    </div>
-                    <div class="form-group">
-                        <label>سعر الإيجار (TON)</label>
-                        <input type="number" id="new-gift-price" class="form-control" placeholder="مثال: 35">
-                    </div>
-                    <br>
-                    <button class="submit-btn btn-admin" onclick="addNewGiftByAdmin()">حفظ ونشر الهدية فوراً 🚀</button>
+                    <div class="form-group"><label>اسم الهدية</label><input type="text" id="new-gift-name" class="form-control" placeholder="Premium Star"></div>
+                    <div class="form-group"><label>الوصف القصير</label><input type="text" id="new-gift-desc" class="form-control" placeholder="VIP Gift"></div>
+                    <div class="form-group"><label>سعر الإيجار (TON)</label><input type="number" id="new-gift-price" class="form-control" placeholder="30"></div>
+                    <br><button class="submit-btn" style="background:var(--admin-color)" onclick="addNewGiftByAdmin()">نشر الهدية حياً 🚀</button>
                 </div>
             </div>
-
             <div id="admin-staff" class="admin-sub-page" style="display: none;">
                 <div class="card">
-                    <h3>صلاحية: تعيين رتب وطواقم إدارية أقل</h3>
-                    <br>
-                    <div class="form-group">
-                        <label>اسم المشرف الجديد</label>
-                        <input type="text" id="staff-name" class="form-control" placeholder="ادخل الاسم الكامل">
-                    </div>
-                    <div class="form-group">
-                        <label>تحديد رتبة الصلاحية</label>
-                        <select id="staff-role" class="form-control" style="background:#1f2937;">
-                            <option value="Moderator">مراقب عام (Moderator)</option>
-                            <option value="Support">الدعم الفني والمالي (Support)</option>
-                            <option value="Developer">مطور فرعي (Developer)</option>
-                        </select>
-                    </div>
-                    <br>
-                    <button class="submit-btn btn-admin" onclick="addNewStaff()">تعيين وتوثيق الرتبة 🔐</button>
-
-                    <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <th>المسؤول</th>
-                                <th>الرتبة المعينة</th>
-                            <th>الحالة</th>
-                            </tr>
-                        </thead>
-                        <tbody id="staff-table-body">
-                            <tr>
-                                <td>الأدمن الأساسي</td>
-                                <td><span class="badge admin">Owner / Full Powers</span></td>
-                                <td style="color:var(--success)">نشط الآن</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div id="admin-settings" class="admin-sub-page" style="display: none;">
-                <div class="card">
-                    <h3>⚙️ لوحة الإعدادات الشاملة (Full Settings)</h3>
-                    <br>
-                    <div class="form-group">
-                        <label>حالة صيانة المنصة</label>
-                        <select class="form-control" style="background:#1f2937;">
-                            <option>الموقع متاح للجميع حياً (Live)</option>
-                            <option>وضع الصيانة المغلق (Under Maintenance)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>عمولة المنصة من كل عملية إيجار (%)</label>
-                        <input type="number" class="form-control" value="2">
-                    </div>
-                    <p style="color:var(--muted); font-size:12px; margin-top:10px;">ملاحظة: كافة التعديلات في هذا القسم تقع في مرحلة التطوير البرمجي الحقيقي 🛠️</p>
+                    <div class="form-group"><label>اسم المشرف الجديد</label><input type="text" id="staff-name" class="form-control"></div>
+                    <br><button class="submit-btn" style="background:var(--admin-color)" onclick="addNewStaff()">تعيين وتوثيق الرتبة 🔐</button>
                 </div>
             </div>
         </div>
@@ -408,19 +352,10 @@
 
     <div class="modal-overlay" id="admin-login-modal">
         <div class="modal-card">
-            <h2 style="color:var(--admin-color); text-align:center; margin-bottom:20px;">
-                <i class="fa-solid fa-lock"></i> تسجيل دخول الإدارة
-            </h2>
-            <div class="form-group">
-                <label>اسم المستخدم (User)</label>
-                <input type="text" id="login-username" class="form-control" placeholder="أدخل اسم المستخدم">
-            </div>
-            <div class="form-group">
-                <label>كلمة المرور (Password)</label>
-                <input type="password" id="login-password" class="form-control" placeholder="أدخل الرقم السري">
-            </div>
-            <br>
-            <button class="submit-btn btn-admin" onclick="validateAdminLogin()">تأكيد الهوية والدخول 🔑</button>
+            <h2 style="color:var(--admin-color); text-align:center; margin-bottom:20px;"><i class="fa-solid fa-lock"></i> حماية النظام</h2>
+            <div class="form-group"><label>اسم المستخدم</label><input type="text" id="login-username" class="form-control"></div>
+            <div class="form-group"><label>كلمة المرور</label><input type="password" id="login-password" class="form-control"></div>
+            <br><button class="submit-btn" style="background:var(--admin-color)" onclick="validateAdminLogin()">تأكيد الهوية 🔑</button>
             <button class="submit-btn" style="background:transparent; margin-top:10px; color:var(--muted);" onclick="closeLoginModal()">إلغاء</button>
         </div>
     </div>
@@ -428,34 +363,20 @@
     <div class="toast" id="toast"></div>
 
     <div class="bottom-nav">
-        <div class="nav-item active" onclick="navClick(this, 'Home')">
-            <i class="fa-solid fa-house"></i>
-            <span>Home</span>
-        </div>
-        <div class="nav-item" onclick="navClick(this, 'Offers')">
-            <i class="fa-solid fa-folder-open"></i>
-            <span>Offers</span>
-        </div>
-        <div class="nav-item" onclick="navClick(this, 'Add')">
-            <i class="fa-solid fa-plus"></i>
-            <span>Add</span>
-        </div>
-        <div class="nav-item" onclick="navClick(this, 'History')">
-            <i class="fa-solid fa-clock"></i>
-            <span>History</span>
-        </div>
-        <div class="nav-item" onclick="navClick(this, 'Profile')">
-            <i class="fa-solid fa-user"></i>
-            <span>Profile</span>
+        <div class="nav-item active" onclick="navClick(this, 'Home')"><i class="fa-solid fa-house"></i><span>Home</span></div>
+        <div class="nav-item" onclick="navClick(this, 'Offers')"><i class="fa-solid fa-folder-open"></i><span>Offers</span></div>
+        <div class="nav-item" onclick="navClick(this, 'Add')"><i class="fa-solid fa-plus"></i><span>Add</span></div>
+        <div class="nav-item" onclick="navClick(this, 'History')"><i class="fa-solid fa-clock"></i><span>History</span></div>
+        <div class="nav-item" onclick="navClick(this, 'Profile')"><i class="fa-solid fa-user"></i><span>Profile</span></div>
+        
+        <div class="bottom-decor">
+            <i class="fa-solid fa-circle-nodes" style="font-size:8px; animation: spin 4s linear infinite;"></i> TON Blockchain Secured Platform
         </div>
     </div>
 
     <script>
-        let isConnected = false;
-        let isAdminLoggedIn = false; // تتبع حالة تسجيل دخول الأدمن لعرض المحتوى بأمان
-        let currentGiftsCount = 2;
+        let isConnected = false, isAdminLoggedIn = false, currentGiftsCount = 1;
 
-        // نظام ربط المحفظة المحاكي الفخم
         function connectWallet() {
             const walletBtn = document.querySelector('.wallet');
             if (!isConnected) {
@@ -466,187 +387,93 @@
                     walletBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i> UQ...8f9z';
                     showToast('تم ربط محفظة TON بنجاح! 💎');
                 }, 1200);
-            } else {
-                showToast('المحفظة متصلة بالفعل ✨');
-            }
+            } else { showToast('المحفظة متصلة بالفعل ✨'); }
         }
 
-        // بوابات حماية لوحة الأدمن
         function triggerAdminAccess() {
-            if (isAdminLoggedIn) {
-                // إذا كان مسجل دخول مسبقاً، تنقله للوحة مباشرة
-                openAdminPageDirectly();
-            } else {
-                // فتح نافذة تسجيل الدخول الفخمة
-                document.getElementById('admin-login-modal').style.display = 'flex';
-                if (navigator.vibrate) navigator.vibrate(10);
-            }
+            if (isAdminLoggedIn) { openAdminPageDirectly(); } 
+            else { document.getElementById('admin-login-modal').style.display = 'flex'; }
         }
+        function closeLoginModal() { document.getElementById('admin-login-modal').style.display = 'none'; }
 
-        function closeLoginModal() {
-            document.getElementById('admin-login-modal').style.display = 'none';
-        }
-
-        // فحص صحة بيانات الأدمن (اليوز والرمز) بالكامل
         function validateAdminLogin() {
-            const user = document.getElementById('login-username').value;
-            const pass = document.getElementById('login-password').value;
-
-            if (user === 'admin' && pass === '1234') {
-                isAdminLoggedIn = true;
-                closeLoginModal();
-                showToast('🔓 تم التحقق بنجاح! أهلاً بك يا مدير');
-                openAdminPageDirectly();
-            } else {
-                if (navigator.vibrate) navigator.vibrate([100, 50, 100]); // اهتزاز خطأ
-                showToast('❌ البيانات خاطئة! صلاحية مرفوضة.');
-            }
+            if (document.getElementById('login-username').value === 'admin' && document.getElementById('login-password').value === '1234') {
+                isAdminLoggedIn = true; closeLoginModal(); showToast('🔓 أهلاً بك يا مدير'); openAdminPageDirectly();
+            } else { showToast('❌ البيانات خاطئة!'); }
         }
 
         function openAdminPageDirectly() {
             document.querySelectorAll('.main > .page').forEach(page => page.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            document.getElementById('page-Admin').classList.add('active');
+            const adminPage = document.getElementById('page-Admin');
+            adminPage.style.display = 'block'; setTimeout(() => adminPage.classList.add('active'), 10);
         }
 
-        // تنقل القائمة السفلية للمستخدمين
+        // دالة التنقل المحسنة بالأنيميشن التدريجي (Fade & Slide Up)
         function navClick(element, sectionName) {
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             element.classList.add('active');
             
-            document.querySelectorAll('.main > .page').forEach(page => page.classList.remove('active'));
+            const allPages = document.querySelectorAll('.main > .page');
+            allPages.forEach(page => { page.classList.remove('active'); page.style.display = 'none'; });
             
             const targetPage = document.getElementById(`page-${sectionName}`);
             if (targetPage) {
-                targetPage.classList.add('active');
+                targetPage.style.display = 'block';
+                setTimeout(() => { targetPage.classList.add('active'); }, 20); // تأخير بسيط لتفعيل أنيميشن الـ CSS حياً
             }
-            
-            if (navigator.vibrate) navigator.vibrate(10);
-            showToast(`أنت الآن في: ${sectionName}`);
+            if (navigator.vibrate) navigator.vibrate(8);
         }
 
-        // التبويب الفرعي داخل صفحة الرئيسية (Home)
         function openSubTab(subPageId, element) {
             const homePage = document.getElementById('page-Home');
             homePage.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
             element.classList.add('active');
-
             homePage.querySelectorAll('.sub-page').forEach(subPage => subPage.style.display = 'none');
             document.getElementById(subPageId).style.display = 'block';
-            
-            if (navigator.vibrate) navigator.vibrate(5);
         }
 
-        // التبويب الفرعي داخل لوحة تحكم الأدمن (Admin Panel)
         function openAdminTab(adminSubId, element) {
             const adminPage = document.getElementById('page-Admin');
             adminPage.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
             element.classList.add('active');
-
             adminPage.querySelectorAll('.admin-sub-page').forEach(asp => asp.style.display = 'none');
             document.getElementById(adminSubId).style.display = 'block';
-
-            if (navigator.vibrate) navigator.vibrate(5);
         }
 
-        // تفعيل الإضافة الحية للهدية ونشرها بالصفحة الرئيسية للمستخدمين فوراً!
         function addNewGiftByAdmin() {
             const name = document.getElementById('new-gift-name').value.trim();
             const desc = document.getElementById('new-gift-desc').value.trim();
             const price = document.getElementById('new-gift-price').value.trim();
+            if (!name || !desc || !price) return;
 
-            if (!name || !desc || !price) {
-                showToast('⚠️ يرجى ملء كافة تفاصيل الهدية أولاً');
-                return;
-            }
-
-            // إنشاء هيكل كارد الهدية الجديد ديناميكياً
             const giftList = document.getElementById('gifts-list');
             const newCard = document.createElement('div');
             newCard.className = 'card';
-            newCard.innerHTML = `
-                <div class="product">
-                    <div class="product-info">
-                        <div class="product-icon"><i class="fa-solid fa-gem" style="color:var(--accent)"></i></div>
-                        <div>
-                            <h3>${name}</h3>
-                            <p>${desc}</p>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="price">${price} TON</div>
-                        <button class="rent-btn" onclick="rentGift()">Rent</button>
-                    </div>
-                </div>
-            `;
-            
-            // وضع الهدية الجديدة في الأعلى
+            newCard.innerHTML = `<div class="product"><div class="product-info"><div class="product-icon"><i class="fa-solid fa-gem"></i></div><div><h3>${name}</h3><p style="color:var(--muted); font-size:13px;">${desc}</p></div></div><div><div class="price">${price} TON</div><button class="rent-btn" onclick="rentGift()">Rent</button></div></div>`;
             giftList.insertBefore(newCard, giftList.firstChild);
 
-            // تحديث عداد الإحصائيات حياً
             currentGiftsCount++;
             document.getElementById('stat-gifts-count').innerText = currentGiftsCount;
-
-            // تصفير الخانات وإظهار رسالة نجاح فخمة
-            document.getElementById('new-gift-name').value = '';
-            document.getElementById('new-gift-desc').value = '';
-            document.getElementById('new-gift-price').value = '';
-            showToast('🚀 تم نشر وتوثيق الهدية بنجاح في الصفحة الرئيسية!');
-        }
-
-        // تفعيل إضافة المشرفين الأقل رتبة في الجدول حياً
-        function addNewStaff() {
-            const staffName = document.getElementById('staff-name').value.trim();
-            const staffRole = document.getElementById('staff-role').value;
-
-            if (!staffName) {
-                showToast('⚠️ يرجى إدخال اسم المشرف الجديد');
-                return;
-            }
-
-            const tableBody = document.getElementById('staff-table-body');
-            const newRow = document.createElement('tr');
-            newRow.innerHTML = `
-                <td>${staffName}</td>
-                <td><span class="badge mod">${staffRole}</span></td>
-                <td style="color:var(--accent)">مسجل بالنظام 🛠️</td>
-            `;
-            tableBody.appendChild(newRow);
-
-            document.getElementById('staff-name').value = '';
-            showToast(`🔐 تم منح رتبة ${staffRole} للمستخدم بنجاح!`);
+            showToast('🚀 تم نشر الهدية بنجاح في الهوم!');
         }
 
         function rentGift() {
-            if (!isConnected) {
-                showToast('⚠️ يرجى ربط محفظة TON أولاً لإتمام العملية');
-                return;
-            }
-            showToast('⏳ جاري معالجة الطلب عبر شبكة TON...');
-            setTimeout(() => { showToast('🎉 تم الاستئجار بنجاح!'); }, 2000);
+            if (!isConnected) { showToast('⚠️ يرجى ربط المحفظة أولاً'); return; }
+            showToast('🎉 تم الاستئجار بنجاح!');
         }
 
-        // نظام أنيميشن الـ Toast المطوّر
         let toastTimeout;
         function showToast(message) {
-            const toast = document.getElementById('toast');
-            clearTimeout(toastTimeout);
-            
-            toast.innerHTML = message;
-            toast.style.display = 'block';
-            toast.style.transition = 'none';
-            toast.style.opacity = '0';
-            toast.style.transform = 'translateX(-50%) translateY(-20px)';
-
+            const toast = document.getElementById('toast'); clearTimeout(toastTimeout);
+            toast.innerHTML = message; toast.style.display = 'block';
+            toast.style.transition = 'none'; toast.style.opacity = '0'; toast.style.transform = 'translateX(-50%) translateY(-20px)';
             setTimeout(() => {
                 toast.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                toast.style.opacity = '1';
-                toast.style.transform = 'translateX(-50%) translateY(0)';
+                toast.style.opacity = '1'; toast.style.transform = 'translateX(-50%) translateY(0)';
             }, 30);
-
             toastTimeout = setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateX(-50%) translateY(-20px)';
+                toast.style.opacity = '0'; toast.style.transform = 'translateX(-50%) translateY(-20px)';
                 setTimeout(() => { toast.style.display = 'none'; }, 400);
             }, 2500);
         }
