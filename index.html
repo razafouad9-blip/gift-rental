@@ -136,12 +136,37 @@
             color: white;
         }
 
+        /* نظام إخفاء وإظهار الصفحات */
         .page {
             display: none;
         }
 
         .page.active {
             display: block;
+        }
+
+        /* ستايل صفحة قيد التطوير المركزي */
+        .dev-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 30px;
+        }
+
+        .dev-icon {
+            font-size: 50px;
+            color: var(--accent);
+            margin-bottom: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 15px var(--accent)); }
+            100% { transform: scale(1); opacity: 0.8; }
         }
 
         .card {
@@ -236,7 +261,6 @@
             transform: translateY(-2px);
         }
 
-        /* تعديل ستايل الـ Toast ليكون فخماً جداً ومتناسقاً */
         .toast {
             position: fixed;
             top: 90px;
@@ -288,63 +312,99 @@
     </div>
 
     <div class="main">
-        <div class="tabs">
-            <button class="tab active" onclick="openPage('gifts', this)">Gifts</button>
-            <button class="tab" onclick="openPage('users', this)">Users</button>
-            <button class="tab" onclick="openPage('numbers', this)">Numbers</button>
-        </div>
+        
+        <div id="page-Home" class="page active">
+            <div class="tabs">
+                <button class="tab active" onclick="openSubTab('gifts', this)">Gifts</button>
+                <button class="tab" onclick="openSubTab('users', this)">Users</button>
+                <button class="tab" onclick="openSubTab('numbers', this)">Numbers</button>
+            </div>
 
-        <div id="gifts" class="page active">
-            <div class="card">
-                <div class="product">
-                    <div class="product-info">
-                        <div class="product-icon"><i class="fa-solid fa-gift"></i></div>
+            <div id="gifts" class="sub-page" style="display: block;">
+                <div class="card">
+                    <div class="product">
+                        <div class="product-info">
+                            <div class="product-icon"><i class="fa-solid fa-gift"></i></div>
+                            <div>
+                                <h3>Premium Gift</h3>
+                                <p>Luxury Telegram Gift Rental</p>
+                            </div>
+                        </div>
                         <div>
-                            <h3>Premium Gift</h3>
-                            <p>Luxury Telegram Gift Rental</p>
+                            <div class="price">20 TON</div>
+                            <button class="rent-btn" onclick="rentGift()">Rent</button>
                         </div>
                     </div>
-                    <div>
-                        <div class="price">20 TON</div>
-                        <button class="rent-btn" onclick="rentGift()">Rent</button>
+                </div>
+
+                <div class="card">
+                    <div class="product">
+                        <div class="product-info">
+                            <div class="product-icon"><i class="fa-solid fa-crown"></i></div>
+                            <div>
+                                <h3>Golden Gift</h3>
+                                <p>VIP Telegram Gift</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price">50 TON</div>
+                            <button class="rent-btn" onclick="rentGift()">Rent</button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="card">
-                <div class="product">
-                    <div class="product-info">
-                        <div class="product-icon"><i class="fa-solid fa-crown"></i></div>
-                        <div>
-                            <h3>Golden Gift</h3>
-                            <p>VIP Telegram Gift</p>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="price">50 TON</div>
-                        <button class="rent-btn" onclick="rentGift()">Rent</button>
-                    </div>
+            <div id="users" class="sub-page" style="display: none;">
+                <div class="card">
+                    <h2>Users</h2>
+                    <br>
+                    <p>Connected users will appear here.</p>
+                </div>
+            </div>
+
+            <div id="numbers" class="sub-page" style="display: none;">
+                <div class="card">
+                    <h2>Statistics</h2>
+                    <br>
+                    <p>🎁 Gifts Available: 25</p>
+                    <p>👤 Users: 1200</p>
+                    <p>💎 Rentals: 540</p>
                 </div>
             </div>
         </div>
 
-        <div id="users" class="page">
-            <div class="card">
-                <h2>Users</h2>
-                <br>
-                <p>Connected users will appear here.</p>
+        <div id="page-Offers" class="page">
+            <div class="card dev-container">
+                <div class="dev-icon"><i class="fa-solid fa-tags"></i></div>
+                <h2>قسم العروض</h2>
+                <p style="color: var(--muted); margin-top: 10px;">الموقع في مرحلة التطوير 🛠️</p>
             </div>
         </div>
 
-        <div id="numbers" class="page">
-            <div class="card">
-                <h2>Statistics</h2>
-                <br>
-                <p>🎁 Gifts Available: 25</p>
-                <p>👤 Users: 1200</p>
-                <p>💎 Rentals: 540</p>
+        <div id="page-Add" class="page">
+            <div class="card dev-container">
+                <div class="dev-icon"><i class="fa-solid fa-circle-plus"></i></div>
+                <h2>قسم إضافة هدية</h2>
+                <p style="color: var(--muted); margin-top: 10px;">الموقع في مرحلة التطوير 🛠️</p>
             </div>
         </div>
+
+        <div id="page-History" class="page">
+            <div class="card dev-container">
+                <div class="dev-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <h2>سجل العمليات</h2>
+                <p style="color: var(--muted); margin-top: 10px;">الموقع في مرحلة التطوير 🛠️</p>
+            </div>
+        </div>
+
+        <div id="page-Profile" class="page">
+            <div class="card dev-container">
+                <div class="dev-icon"><i class="fa-solid fa-user-gear"></i></div>
+                <h2>الملف الشخصي</h2>
+                <p style="color: var(--muted); margin-top: 10px;">الموقع في مرحلة التطوير 🛠️</p>
+            </div>
+        </div>
+
     </div>
 
     <div class="toast" id="toast"></div>
@@ -391,24 +451,34 @@
             }
         }
 
-        // التبديل السلس بين الـ Tabs
-        function openPage(pageId, element) {
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-
-            document.getElementById(pageId).classList.add('active');
-            element.classList.add('active');
-            
-            if (navigator.vibrate) navigator.vibrate(5);
-        }
-
-        // التنقل عبر القائمة السفلية
+        // التنقل الرئيسي عبر القائمة السفلية (Bottom Nav) ليُظهر كل صفحة على حدة
         function navClick(element, sectionName) {
+            // إزالة التنشيط من جميع الأزرار السفلية
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             element.classList.add('active');
             
+            // إخفاء جميع الصفحات الخمسة الرئيسية
+            document.querySelectorAll('.main > .page').forEach(page => page.classList.remove('active'));
+            
+            // إظهار الصفحة المحددة بناءً على اسمها
+            const targetPage = document.getElementById(`page-${sectionName}`);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+            
             if (navigator.vibrate) navigator.vibrate(10);
-            showToast(`الانتقال إلى قسم: ${sectionName}`);
+            showToast(`أنت الآن في: ${sectionName}`);
+        }
+
+        // التبديل الداخلي بين التبويبات العلوية (فقط داخل صفحة Home)
+        function openSubTab(subPageId, element) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            element.classList.add('active');
+
+            document.querySelectorAll('.sub-page').forEach(subPage => subPage.style.display = 'none');
+            document.getElementById(subPageId).style.display = 'block';
+            
+            if (navigator.vibrate) navigator.vibrate(5);
         }
 
         // معالجة استئجار الهدايا
@@ -420,11 +490,11 @@
             
             showToast('⏳ جاري معالجة الطلب عبر شبكة TON...');
             setTimeout(() => {
-                showToast('🎉 تم الاستئجار بنجاح! تفقد قسم الـ History');
+                showToast('🎉 تم الاستئجار بنجاح!');
             }, 2000);
         }
 
-        // نظام أنيميشن الـ Toast المرن والمطور
+        // نظام أنيميشن الـ Toast
         let toastTimeout;
         function showToast(message) {
             const toast = document.getElementById('toast');
@@ -433,19 +503,16 @@
             toast.innerHTML = message;
             toast.style.display = 'block';
             
-            // تهيئة التأثير الفيزيائي (Elastic Bounce)
             toast.style.transition = 'none';
             toast.style.opacity = '0';
             toast.style.transform = 'translateX(-50%) translateY(-20px)';
 
-            // تشغيل الدخول بعد أجزاء من الثانية
             setTimeout(() => {
                 toast.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
                 toast.style.opacity = '1';
                 toast.style.transform = 'translateX(-50%) translateY(0)';
             }, 30);
 
-            // الإخفاء التلقائي الفخم
             toastTimeout = setTimeout(() => {
                 toast.style.opacity = '0';
                 toast.style.transform = 'translateX(-50%) translateY(-20px)';
