@@ -1,347 +1,190 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width,
-initial-scale=1.0,
-maximum-scale=1.0,
-user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Gift Rental Premium</title>
 
-<link rel="preconnect"
-href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 <style>
 
 :root{
-
 --bg:#07090F;
-
 --card:#111827;
-
---card2:#171F2F;
-
 --primary:#7C3AED;
-
 --primary2:#A855F7;
-
 --accent:#38BDF8;
-
 --text:#F8FAFC;
-
 --muted:#94A3B8;
-
---border:#2B3245;
-
---danger:#EF4444;
-
---radius:20px;
-
 }
+
 
 *{
-
 margin:0;
-
 padding:0;
-
 box-sizing:border-box;
-
 font-family:'Inter',sans-serif;
-
 -webkit-tap-highlight-color:transparent;
-
-user-select:none;
-
 }
+
 
 body{
 
 background:
+radial-gradient(circle at top,#1E1B4B,#07090F 50%);
 
-radial-gradient(circle at top,
-
-#1E1B4B,
-
-#07090F 45%);
-
-color:var(--text);
-
+color:white;
 height:100vh;
-
 overflow:hidden;
 
-display:flex;
-
-flex-direction:column;
-
 }
+
 
 button{
 
-border:none;
-
+border:0;
 outline:none;
-
 cursor:pointer;
 
-transition:.30s;
-
 }
 
-::-webkit-scrollbar{
-
-width:4px;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-background:var(--primary);
-
-border-radius:20px;
-
-}
 
 .header{
 
-height:72px;
+height:75px;
 
 display:flex;
-
 align-items:center;
-
 justify-content:space-between;
 
 padding:0 18px;
 
-background:rgba(15,23,42,.55);
+background:rgba(15,23,42,.7);
 
 backdrop-filter:blur(25px);
 
-border-bottom:1px solid rgba(124,58,237,.20);
-
-box-shadow:
-
-0 0 25px rgba(124,58,237,.10);
+border-bottom:1px solid rgba(255,255,255,.08);
 
 }
+
 
 .logo{
 
 display:flex;
-
 align-items:center;
-
 gap:12px;
 
 }
 
+
 .logo-icon{
 
-width:42px;
+width:45px;
+height:45px;
 
-height:42px;
-
-border-radius:14px;
-
-background:
-
-linear-gradient(135deg,
-
-var(--primary),
-
-var(--primary2));
+border-radius:15px;
 
 display:flex;
-
 align-items:center;
-
 justify-content:center;
 
-font-size:18px;
+background:linear-gradient(135deg,var(--primary),var(--primary2));
 
-box-shadow:
-
-0 0 18px rgba(124,58,237,.45);
+box-shadow:0 0 25px #7c3aed;
 
 }
 
-.logo-title{
-
-display:flex;
-
-flex-direction:column;
-
-}
 
 .logo-title h2{
 
 font-size:18px;
 
-font-weight:800;
-
 }
+
 
 .logo-title span{
 
 font-size:12px;
-
 color:var(--muted);
 
 }
 
+
+
 .header-actions{
 
 display:flex;
-
+gap:8px;
 align-items:center;
 
-gap:10px;
-
 }
+
+
 
 .circle-btn{
 
 width:42px;
-
 height:42px;
 
 border-radius:50%;
 
-background:rgba(255,255,255,.05);
+background:#ffffff12;
 
 color:white;
 
-border:1px solid rgba(255,255,255,.07);
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-font-size:15px;
-
 }
 
-.circle-btn:hover{
 
-transform:translateY(-2px);
-
-background:rgba(124,58,237,.20);
-
-}
 
 .wallet{
 
-padding:11px 18px;
+padding:12px 16px;
 
 border-radius:30px;
 
-background:
-
-linear-gradient(135deg,
-
-var(--primary),
-
-var(--primary2));
+background:linear-gradient(135deg,var(--primary),var(--primary2));
 
 color:white;
 
 font-weight:700;
 
-display:flex;
-
-gap:8px;
-
-align-items:center;
-
-box-shadow:
-
-0 10px 25px rgba(124,58,237,.35);
-
 }
 
-.wallet:hover{
 
-transform:scale(1.04);
-
-}
 
 .main{
 
-flex:1;
+height:calc(100vh - 155px);
 
 overflow:auto;
 
 padding:18px;
 
-padding-bottom:120px;
-
-}
-    .content-card{
-
-background:rgba(255,255,255,.04);
-
-border:1px solid rgba(255,255,255,.06);
-
-border-radius:22px;
-
-padding:18px;
-
-margin-bottom:18px;
-
-backdrop-filter:blur(18px);
-
-transition:.35s;
-
 }
 
-.content-card:hover{
 
-transform:translateY(-3px);
-
-border-color:rgba(124,58,237,.35);
-
-box-shadow:0 15px 40px rgba(124,58,237,.15);
-
-}
 
 .tabs{
 
 display:flex;
 
-gap:12px;
+gap:10px;
 
 margin-bottom:20px;
 
-overflow-x:auto;
-
-scrollbar-width:none;
-
 }
 
-.tabs::-webkit-scrollbar{
 
-display:none;
-
-}
 
 .tab{
 
@@ -349,15 +192,14 @@ padding:10px 18px;
 
 border-radius:30px;
 
-background:rgba(255,255,255,.04);
+background:#ffffff10;
 
-color:var(--muted);
+color:#aaa;
 
 font-weight:700;
 
-white-space:nowrap;
-
 }
+
 
 .tab.active{
 
@@ -365,9 +207,43 @@ background:linear-gradient(135deg,var(--primary),var(--primary2));
 
 color:white;
 
-box-shadow:0 10px 25px rgba(124,58,237,.35);
+}
+
+
+
+.page{
+
+display:none;
 
 }
+
+
+
+.page.active{
+
+display:block;
+
+}
+
+
+
+.card{
+
+background:#ffffff08;
+
+border:1px solid #ffffff12;
+
+border-radius:22px;
+
+padding:18px;
+
+margin-bottom:15px;
+
+backdrop-filter:blur(15px);
+
+}
+
+
 
 .product{
 
@@ -377,111 +253,64 @@ justify-content:space-between;
 
 align-items:center;
 
-padding:18px;
-
-border-radius:22px;
-
-margin-bottom:15px;
-
-background:linear-gradient(135deg,#131C2F,#0E1625);
-
-border:1px solid rgba(255,255,255,.06);
-
-transition:.35s;
-
 }
 
-.product:hover{
-
-transform:translateY(-4px);
-
-box-shadow:0 15px 35px rgba(124,58,237,.20);
-
-}
-
-.product-left{
-
-display:flex;
-
-gap:14px;
-
-align-items:center;
-
-}
 
 .product-icon{
 
-width:56px;
+width:60px;
+height:60px;
 
-height:56px;
-
-border-radius:18px;
+border-radius:20px;
 
 display:flex;
-
 align-items:center;
-
 justify-content:center;
 
-font-size:22px;
+font-size:25px;
 
 background:linear-gradient(135deg,var(--primary),var(--accent));
 
-box-shadow:0 10px 20px rgba(124,58,237,.35);
+}
+
+
+.product-info{
+
+display:flex;
+align-items:center;
+gap:15px;
 
 }
 
-.product-info h3{
-
-font-size:16px;
-
-margin-bottom:6px;
-
-}
-
-.product-info p{
-
-font-size:13px;
-
-color:var(--muted);
-
-}
 
 .price{
+
+color:var(--accent);
 
 font-size:20px;
 
 font-weight:800;
 
-color:var(--accent);
-
-margin-bottom:8px;
-
-text-align:center;
-
 }
+
 
 .rent-btn{
 
-padding:10px 18px;
+margin-top:10px;
 
-border-radius:16px;
+padding:10px 20px;
+
+border-radius:15px;
 
 background:linear-gradient(135deg,var(--primary),var(--primary2));
 
 color:white;
 
-font-weight:700;
-
-box-shadow:0 8px 18px rgba(124,58,237,.35);
+font-weight:bold;
 
 }
 
-.rent-btn:hover{
 
-transform:scale(1.05);
-
-}
 
 .bottom-nav{
 
@@ -493,23 +322,18 @@ left:0;
 
 right:0;
 
-height:82px;
-
-background:rgba(15,23,42,.70);
-
-backdrop-filter:blur(35px);
-
-border-top:1px solid rgba(255,255,255,.06);
+height:80px;
 
 display:grid;
 
 grid-template-columns:repeat(5,1fr);
 
-align-items:center;
+background:#0f172acc;
 
-z-index:999;
+backdrop-filter:blur(25px);
 
 }
+
 
 .nav-item{
 
@@ -517,17 +341,19 @@ display:flex;
 
 flex-direction:column;
 
+justify-content:center;
+
 align-items:center;
 
-gap:6px;
+gap:5px;
 
-color:var(--muted);
+color:#94a3b8;
 
 font-size:12px;
 
-transition:.3s;
-
 }
+
+
 
 .nav-item i{
 
@@ -535,171 +361,467 @@ font-size:20px;
 
 }
 
+
+
 .nav-item.active{
 
 color:white;
 
-transform:translateY(-8px) scale(1.12);
-
 }
+
 
 .nav-item.active i{
 
-color:var(--primary2);
-
-filter:drop-shadow(0 0 12px rgba(168,85,247,.7));
+color:#a855f7;
 
 }
 
-</style>
 
-</head>
+.toast{
+
+position:fixed;
+
+top:90px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+background:#111827;
+
+padding:15px 25px;
+
+border-radius:20px;
+
+display:none;
+
+z-index:999;
+
+box-shadow:0 0 30px #000;
+
+}
+
+
+</style></head>
 
 <body>
-    <div class="header">
 
-    <div class="logo">
+<div class="header">
 
-        <div class="logo-icon">
-            <i class="fa-solid fa-gem"></i>
-        </div>
+<div class="logo">
 
-        <div class="logo-title">
-            <h2>Gift Rental</h2>
-            <span>Premium Platform</span>
-        </div>
+<div class="logo-icon">
+<i class="fa-solid fa-gem"></i>
+</div>
 
-    </div>
-
-    <div class="header-actions">
-
-        <button class="circle-btn">
-            <i class="fa-solid fa-bell"></i>
-        </button>
-
-        <button class="circle-btn">
-            <i class="fa-solid fa-gear"></i>
-        </button>
-
-        <button class="wallet">
-            <i class="fa-solid fa-wallet"></i>
-            TON Connect
-        </button>
-
-    </div>
+<div class="logo-title">
+<h2>Gift Rental</h2>
+<span>Premium Platform</span>
+</div>
 
 </div>
+
+
+<div class="header-actions">
+
+<button class="circle-btn" onclick="showToast('No new notifications')">
+<i class="fa-solid fa-bell"></i>
+</button>
+
+
+<button class="circle-btn" onclick="showToast('Settings')">
+<i class="fa-solid fa-gear"></i>
+</button>
+
+
+<button class="wallet" onclick="connectWallet()">
+<i class="fa-solid fa-wallet"></i>
+TON Connect
+</button>
+
+
+</div>
+
+</div>
+
+
 
 <div class="main">
 
+
 <div class="tabs">
 
-<button class="tab active">
+<button class="tab active" onclick="openPage('gifts',this)">
 Gifts
 </button>
 
-<button class="tab">
+
+<button class="tab" onclick="openPage('users',this)">
 Users
 </button>
 
-<button class="tab">
+
+<button class="tab" onclick="openPage('numbers',this)">
 Numbers
 </button>
 
+
 </div>
 
-<div class="content-card">
+
+
+
+<!-- Gifts Page -->
+
+<div id="gifts" class="page active">
+
+
+<div class="card">
+
 
 <div class="product">
 
-<div class="product-left">
+
+<div class="product-info">
+
 
 <div class="product-icon">
 <i class="fa-solid fa-gift"></i>
 </div>
 
-<div class="product-info">
 
-<h3>Premium Gift</h3>
+<div>
 
-<p>Luxury Telegram Gift Rental</p>
+<h3>
+Premium Gift
+</h3>
+
+<p>
+Luxury Telegram Gift Rental
+</p>
 
 </div>
 
+
 </div>
+
+
 
 <div>
 
 <div class="price">
-
 20 TON
-
 </div>
 
-<button class="rent-btn">
 
+<button class="rent-btn" onclick="rentGift()">
 Rent
-
 </button>
 
-</div>
 
 </div>
 
-</div>
+
 
 </div>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+
+<div class="product">
+
+
+<div class="product-info">
+
+
+<div class="product-icon">
+<i class="fa-solid fa-crown"></i>
+</div>
+
+
+<div>
+
+<h3>
+Golden Gift
+</h3>
+
+<p>
+VIP Telegram Gift
+</p>
+
+
+</div>
+
+
+</div>
+
+
+<div>
+
+<div class="price">
+50 TON
+</div>
+
+
+<button class="rent-btn" onclick="rentGift()">
+Rent
+</button>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- Users Page -->
+
+<div id="users" class="page">
+
+
+<div class="card">
+
+<h2>
+Users
+</h2>
+
+<br>
+
+<p>
+Connected users will appear here.
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- Numbers Page -->
+
+<div id="numbers" class="page">
+
+
+<div class="card">
+
+
+<h2>
+Statistics
+</h2>
+
+<br>
+
+
+<p>
+🎁 Gifts Available: 25</p>
+
+<p>
+👤 Users: 1200
+</p>
+
+<p>
+💎 Rentals: 540
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<div class="toast" id="toast">
+
+</div>
+
+
+
+
 
 <div class="bottom-nav">
 
-<div class="nav-item active">
+
+<div class="nav-item active" onclick="navClick(this,'Home')">
 
 <i class="fa-solid fa-house"></i>
 
-<span>Home</span>
+<span>
+Home
+</span>
 
 </div>
 
-<div class="nav-item">
+
+
+<div class="nav-item" onclick="navClick(this,'Offers')">
 
 <i class="fa-solid fa-folder-open"></i>
 
-<span>Offers</span>
+<span>
+Offers
+</span>
 
 </div>
 
-<div class="nav-item">
+
+
+<div class="nav-item" onclick="navClick(this,'Add')">
 
 <i class="fa-solid fa-plus"></i>
 
-<span>Add</span>
+<span>
+Add
+</span>
 
 </div>
 
-<div class="nav-item">
+
+
+<div class="nav-item" onclick="navClick(this,'History')">
 
 <i class="fa-solid fa-clock"></i>
 
-<span>History</span>
+<span>
+History
+</span>
 
 </div>
 
-<div class="nav-item">
+
+
+<div class="nav-item" onclick="navClick(this,'Profile')">
 
 <i class="fa-solid fa-user"></i>
 
-<span>Profile</span>
+<span>
+Profile
+</span>
 
 </div>
 
-</div>
 
-<script>
+</div><script>
+    // نظام المحفظة الوهمي (يمكنك ربطه بـ TON Connect الحقيقي لاحقاً)
+    let isConnected = false;
 
-// JavaScript هنا
+    function connectWallet() {
+        const walletBtn = document.querySelector('.wallet');
+        if (!isConnected) {
+            walletBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Connecting...';
+            setTimeout(() => {
+                isConnected = true;
+                walletBtn.style.background = 'linear-gradient(135deg, #10B981, #059669)'; // لون أخضر فخم عند الاتصال
+                walletBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i> UQ...8f9z';
+                showToast('تم ربط محفظة TON بنجاح! 💎');
+            }, 1200);
+        } else {
+            showToast('المحفظة متصلة بالفعل.');
+        }
+    }
 
+    // التبديل بين التبويبات العلوية (Tabs)
+    function openPage(pageId, element) {
+        // إخفاء كل الصفحات
+        document.querySelectorAll('.page').forEach(page => {
+            page.classList.remove('active');
+        });
+        
+        // إزالة التنشيط من كل الأزرار
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.classList.remove('active');
+        });
+
+        // إظهار الصفحة المطلوبة وتنشيط الزر الخاص بها
+        document.getElementById(pageId).classList.add('active');
+        element.classList.add('active');
+    }
+
+    // التنقل عبر القائمة السفلية (Bottom Nav)
+    function navClick(element, sectionName) {
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.classList.remove('active');
+        });
+        element.classList.add('active');
+        
+        // تأثير اهتزاز خفيف عند الضغط (Haptic feedback تأثير برمجى)
+        if (navigator.vibrate) {
+            navigator.vibrate(10);
+        }
+        
+        showToast(`الانتقال إلى قسم: ${sectionName}`);
+    }
+
+    // استئجار الهدايا
+    function rentGift() {
+        if (!isConnected) {
+            showToast('⚠️ يرجى ربط محفظة TON أولاً لإتمام العملية');
+            return;
+        }
+        
+        showToast('⏳ جاري معالجة الطلب عبر شبكة TON...');
+        setTimeout(() => {
+            showToast('🎉 تم الاستئجار بنجاح! تفقد قسم الـ History');
+        }, 2000);
+    }
+
+    // نظام التنبيهات الفخم (Toast Notification) مع أنيميشن سلس
+    let toastTimeout;
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        
+        // مسح التنبيه السابق إن وجد فوراً
+        clearTimeout(toastTimeout);
+        
+        toast.innerHTML = message;
+        toast.style.display = 'block';
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(-50%) translateY(-20px)';
+        toast.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+
+        // تأثير الدخول
+        setTimeout(() => {
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateX(-50%) translateY(0)';
+        }, 50);
+
+        // تأثير الخروج التلقائي بعد 3 ثواني
+        toastTimeout = setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateX(-50%) translateY(-20px)';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 400);
+        }, 3000);
+    }
 </script>
-
-</body>
-
-</html> 
